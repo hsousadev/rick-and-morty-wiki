@@ -1,15 +1,15 @@
 import { useContext } from "react";
 import Image from "next/image";
 
-import Logo from "../../../../shared/assets/icons/rick-and-morty-no-border-logo.svg";
-import DarkThemeHeroImage from "../../../../shared/assets/images/hero-image-dark.png";
-import WhiteThemeHeroImage from "../../../../shared/assets/images/hero-image-white.png";
+import Logo from "@/shared/assets/icons/rick-and-morty-no-border-logo.svg";
+import DarkThemeHeroImage from "@/shared/assets/images/hero-image-dark.png";
+import WhiteThemeHeroImage from "@/shared/assets/images/hero-image-white.png";
 
 import { Moon, Sun } from "@phosphor-icons/react";
 
 import DefaultButton from "@/shared/components/DefaultButton";
 
-import { GlobalContext } from "../../../../pages/_app";
+import { GlobalContext } from "@/pages/_app";
 import { Container } from "./styles";
 
 const Hero = () => {

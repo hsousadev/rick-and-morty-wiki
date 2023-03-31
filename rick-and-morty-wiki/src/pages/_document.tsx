@@ -37,9 +37,6 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
             rel="stylesheet"
           />
-          <meta http-equiv="cache-control" content="no-cache"></meta>
-          <meta http-equiv="expires" content="0"></meta>
-          <meta http-equiv="pragma" content="no-cache"></meta>
         </Head>
         <body>
           <Main />

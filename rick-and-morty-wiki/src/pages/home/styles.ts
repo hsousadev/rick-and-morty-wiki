@@ -8,6 +8,7 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 
   width: 100%;
 `;
@@ -34,5 +35,38 @@ export const HeroContent = styled.div<HeroContentProps>`
 
   @media(max-width: 1240px) {
     height: 100%;
+  }
+`;
+
+export const Content = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  padding: 64px 0 80px 0;
+  max-width: 1240px;
+  width: 100%;
+
+  .search-and-filter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+  }
+
+  .characters,
+  .episodes,
+  .locations {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    width: 100%;
+    margin-top: 24px;
+
+    gap: 16px;
   }
 `;

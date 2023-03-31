@@ -1,5 +1,7 @@
 import type { AppProps } from "next/app";
-import { GlobalStyles } from "../shared/styles/global";
+import { GlobalStyles } from "@/shared/styles/global";
+
+import Footer from "@/shared/components/Footer";
 
 import { createContext, useState } from "react";
 
@@ -18,7 +20,10 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <GlobalContext.Provider value={{ darkTheme, setDarkTheme }}>
-      <GlobalStyles darkTheme={darkTheme} /> <Component {...pageProps} />
+      <>
+        <GlobalStyles darkTheme={darkTheme} /> <Component {...pageProps} />
+        <Footer />
+      </>
     </GlobalContext.Provider>
   );
 }

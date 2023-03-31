@@ -20,12 +20,16 @@ export const GlobalStyles = createGlobalStyle<GlobalStylesProps>`
           :root {
             --BTN-BACKGROUND: #313234;
             --FONT-COLOR: #fff;
+            --CARD-BACKGROUND: #1a1a1a;
+            --CARD-BACKGROUND-HOVER: #313234;
           }
         `
       : css`
           :root {
             --BTN-BACKGROUND: transparent;
             --FONT-COLOR: #313234;
+            --CARD-BACKGROUND: #f9f9f9;
+            --CARD-BACKGROUND-HOVER: #f1f1f1;
           }
         `}
 
@@ -35,6 +39,7 @@ export const GlobalStyles = createGlobalStyle<GlobalStylesProps>`
     margin: 0;
     padding: 0;
     font-family: "Inter", sans-serif;
+    overflow-x: hidden;
 
     ${(props) =>
       props.darkTheme
@@ -102,6 +107,13 @@ export const GlobalStyles = createGlobalStyle<GlobalStylesProps>`
     appearance: none;
     border: none;
     background: transparent;
+  }
+
+  input {
+    appearance: none;
+    outline: none;
+    border: none;
+    font-family: Inter;
   }
 
   @media(max-width: 720px) {

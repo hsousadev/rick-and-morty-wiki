@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 interface ContainerProps {
   isDarkTheme: boolean;
-  selected?: boolean;
+  isSelected?: boolean;
 }
 
 export const Container = styled.button<ContainerProps>`
@@ -20,11 +20,16 @@ export const Container = styled.button<ContainerProps>`
     margin-left: 8px;
   }
 
+  svg {
+    transition: all 0.4s ease-in-out;
+  }
+
   :hover {
     transition: all 0.4s ease-in-out;
     background-color: var(--BLUE-A);
 
     svg {
+      transition: all 0.4s ease-in-out;
       fill: white;
     }
 
@@ -34,7 +39,7 @@ export const Container = styled.button<ContainerProps>`
   }
 
   ${(props) =>
-    props.selected
+    props.isSelected
       ? css`
           background-color: var(--BLUE-A);
           p {

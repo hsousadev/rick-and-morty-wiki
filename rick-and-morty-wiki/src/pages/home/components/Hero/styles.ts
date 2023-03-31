@@ -51,6 +51,7 @@ export const Container = styled.div<ContainerProps>`
     flex-direction: column-reverse;
     align-items: center;
     justify-content: center;
+    overflow-x: hidden;
 
     img.hero-image {
       align-self: center;

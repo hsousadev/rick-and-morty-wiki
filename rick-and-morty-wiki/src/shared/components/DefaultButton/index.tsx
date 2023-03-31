@@ -6,7 +6,7 @@ import { GlobalContext } from "../../../pages/_app";
 interface DefaultButtonProps extends HTMLAttributes<HTMLButtonElement> {
   icon: any;
   text: string;
-  onClick: () => void;
+  onClick?: () => void;
   selected?: boolean;
 }
 
@@ -19,7 +19,7 @@ const DefaultButton = ({
   const { darkTheme } = useContext(GlobalContext);
 
   return (
-    <Container isDarkTheme={darkTheme} onClick={onClick} selected={selected}>
+    <Container isDarkTheme={darkTheme} onClick={onClick} isSelected={selected}>
       {icon}
       <p>{text}</p>
     </Container>
