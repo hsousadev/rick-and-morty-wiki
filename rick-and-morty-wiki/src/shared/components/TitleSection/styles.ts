@@ -8,4 +8,8 @@ export const Container = styled.div`
   gap: 16px;
 
   margin-top: 64px;
+
+  @media (max-width: 1360px) {
+    justify-content: center;
+  }
 `;

@@ -36,4 +36,8 @@ export const Container = styled.div<ContatinerProps>`
   input[type="search"] {
     font-size: 16px;
   }
+
+  @media (max-width: 580px) {
+    width: 100%;
+  }
 `;

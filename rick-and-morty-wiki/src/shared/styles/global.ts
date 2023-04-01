@@ -12,6 +12,8 @@ export const GlobalStyles = createGlobalStyle<GlobalStylesProps>`
     --BLUE-A: #11b0c8;
     --BLUE-B: #42b4ca;
     --PEAR: #bfde42;
+    --RED: #DE4242;
+    --MAX-CONTENT-WIDTH: 1240px;
   }
 
   ${(props) =>

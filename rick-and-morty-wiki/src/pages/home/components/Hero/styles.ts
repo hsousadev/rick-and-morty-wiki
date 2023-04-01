@@ -9,15 +9,13 @@ export const Container = styled.div<ContainerProps>`
   align-items: flex-start;
   justify-content: space-between;
 
-  max-width: 1240px;
+  max-width: var(--MAX-CONTENT-WIDTH);
   width: 100%;
   height: 100%;
 
-  padding-top: 64px;
-
   .hero-info {
     h1 {
-      margin-top: 64px;
+      margin-top: 48px;
     }
 
     h4 {
@@ -44,11 +42,17 @@ export const Container = styled.div<ContainerProps>`
   }
 
   @media (max-width: 1360px) {
+    align-items: center;
+    justify-content: center;
+    flex-direction: column-reverse;
     padding: 64px 64px 0 64px;
+
+    img {
+      align-self: center;
+    }
   }
 
-  @media (max-width: 1240px) {
-    flex-direction: column-reverse;
+  @media (max-width: 560px) {
     align-items: center;
     justify-content: center;
     overflow-x: hidden;

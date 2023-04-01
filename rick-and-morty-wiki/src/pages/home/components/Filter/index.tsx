@@ -1,4 +1,4 @@
-import { Smiley, Planet, MonitorPlay } from "@phosphor-icons/react";
+import { SmileyBlank, Planet, MonitorPlay } from "@phosphor-icons/react";
 
 import DefaultButton from "@/shared/components/DefaultButton";
 import smoothScroll from "@/shared/utils/smoothScroll";
@@ -9,7 +9,7 @@ const Filter = () => {
   return (
     <Container>
       <DefaultButton
-        icon={<Smiley size={24} color={`var(--FONT-COLOR)`} />}
+        icon={<SmileyBlank size={24} color={`var(--FONT-COLOR)`} />}
         text="Personagens"
         onClick={() => smoothScroll("characters")}
       />

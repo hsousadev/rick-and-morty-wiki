@@ -25,6 +25,7 @@ export const Content = styled.div`
   width: 152px;
 
   > h4 {
+    text-align: center;
     text-overflow: ellipsis;
     overflow: hidden;
     display: -webkit-box;

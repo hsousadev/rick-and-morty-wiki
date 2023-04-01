@@ -3,8 +3,6 @@ import Home from "./home";
 
 import HomeContext, { HomeContextProps } from "../pages/home/context";
 
-import "@/shared/styles/global.ts";
-
 export async function getStaticProps() {
   const resCharacterList = await fetch(
     "https://rickandmortyapi.com/api/character"

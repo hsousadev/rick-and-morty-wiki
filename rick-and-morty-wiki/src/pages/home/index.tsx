@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { useContext } from "react";
 
 import Hero from "./components/Hero";
@@ -15,15 +16,17 @@ import HomeContext from "./context";
 import { Container, HeroContent, Content } from "./styles";
 
 const Home = () => {
+  const router = useRouter();
+
   const { darkTheme } = useContext(GlobalContext);
   const { characterList, episodeList, locationList } = useContext(HomeContext);
 
-  const characterListData = characterList?.results.slice(0, 12);
-  const episodeListData = episodeList?.results.slice(0, 10);
-  const locationListData = locationList?.results.slice(0, 14);
+  const characterListData = characterList?.results?.slice(0, 12);
+  const episodeListData = episodeList?.results?.slice(0, 10);
+  const locationListData = locationList?.results?.slice(0, 14);
 
   return (
-    <Container id="hero">
+    <Container>
       <HeroContent isDarkTheme={darkTheme}>
         <Hero />
       </HeroContent>
@@ -33,11 +36,16 @@ const Home = () => {
           <Filter />
         </div>
 
-        <TitleSection id="characters" title="Personagens" />
+        <TitleSection
+          onClick={() => router.push("/character/1")}
+          id="characters"
+          title="Personagens"
+        />
 
         <div className="characters">
           {characterListData?.map((character: any, index: number) => (
             <CharacterCard
+              id={character?.id}
               key={index}
               image={character?.image}
               name={character?.name}
@@ -51,7 +59,7 @@ const Home = () => {
         <TitleSection id="episodes" title="Episódios" />
 
         <div className="episodes">
-          {episodeListData.map((episode: any) => (
+          {episodeListData?.map((episode: any) => (
             <EpisodeCard
               key={episode?.id}
               name={episode?.name}
@@ -63,7 +71,7 @@ const Home = () => {
         <TitleSection id="locations" title="Localizações" />
 
         <div className="locations">
-          {locationListData.map((location: any, index: number) => (
+          {locationListData?.map((location: any, index: number) => (
             <LocationCard
               key={index}
               type={location?.type}

@@ -15,7 +15,7 @@ const Footer = () => {
           <Image src={logo} alt="" width={128} />
 
           <div className="return-top">
-            <button onClick={() => smoothScroll("hero")}>
+            <button onClick={() => smoothScroll("top")}>
               <h4>Voltar ao topo</h4>
               <ArrowUp weight="thin" size={24} color={`var(--FONT-COLOR)`} />
             </button>

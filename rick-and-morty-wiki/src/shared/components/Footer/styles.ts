@@ -9,7 +9,7 @@ export const Container = styled.div`
 
 export const Content = styled.div`
   width: 100%;
-  max-width: 1240px;
+  max-width: var(--MAX-CONTENT-WIDTH);
 
   border-top: 1px solid var(--FONT-COLOR);
 
@@ -66,6 +66,10 @@ export const Content = styled.div`
       transition: all 0.4s ease-in-out;
       border-bottom: 1px solid var(--BLUE-A);
     }
+  }
+
+  @media (max-width: 1366px) {
+    padding: 64px;
   }
 
   @media (max-width: 768px) {
