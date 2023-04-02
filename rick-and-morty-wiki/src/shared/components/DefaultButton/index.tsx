@@ -8,6 +8,7 @@ interface DefaultButtonProps extends HTMLAttributes<HTMLButtonElement> {
   text?: string;
   onClick?: () => void;
   selected?: boolean;
+  color?: string;
 }
 
 const DefaultButton = ({
@@ -15,11 +16,17 @@ const DefaultButton = ({
   text,
   onClick,
   selected,
+  color,
 }: DefaultButtonProps) => {
   const { darkTheme } = useContext(GlobalContext);
 
   return (
-    <Container isDarkTheme={darkTheme} onClick={onClick} isSelected={selected}>
+    <Container
+      color={color}
+      isDarkTheme={darkTheme}
+      onClick={onClick}
+      isSelected={selected}
+    >
       {icon}
       {text && <p>{text}</p>}
     </Container>

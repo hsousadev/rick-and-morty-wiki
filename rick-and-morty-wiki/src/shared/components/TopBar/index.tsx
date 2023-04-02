@@ -21,6 +21,7 @@ const TopBar = () => {
   const isMobile = windowSize.windowWidth <= 500;
 
   const isHome = router.pathname === "/" || router.pathname === "/home";
+  const isFavorites = router.pathname === "/favorites";
 
   function handleActiveDarkTheme() {
     setDarkTheme(true);
@@ -36,12 +37,15 @@ const TopBar = () => {
         <Image src={Logo} height={64} alt="Site Logo" />
 
         <div className="buttons">
-          <DefaultButton
-            icon={<Heart size={24} color={`var(--FONT-COLOR)`} />}
-            text={
-              isMobile ? (isHome ? "Meus favoritos" : "") : "Meus favoritos"
-            }
-          />
+          {!isFavorites && (
+            <DefaultButton
+              icon={<Heart size={24} color={`var(--FONT-COLOR)`} />}
+              text={
+                isMobile ? (isHome ? "Meus favoritos" : "") : "Meus favoritos"
+              }
+              onClick={() => router.push("/favorites")}
+            />
+          )}
           {!isHome && (
             <>
               <DefaultButton

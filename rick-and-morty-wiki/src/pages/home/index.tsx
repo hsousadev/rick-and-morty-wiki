@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import Hero from "./components/Hero";
 import Search from "./components/Search";
-import Filter from "./components/Filter";
+import Filter from "@/shared/components/Filter";
 
 import TitleSection from "@/shared/components/TitleSection";
 import CharacterCard from "@/shared/components/CharacterCard";
@@ -34,6 +34,19 @@ const Home = () => {
     useState(characterList);
   const [episodeListInitial, setEpisodeListInitial] = useState(episodeList);
   const [locationListInitial, setLocationListInitial] = useState(locationList);
+
+  const [newStoredCharacters, setNewStoredCharacters] = useState(false);
+  const [storedCharacters, setStoredCharacters] = useState([]);
+
+  function handleGetStoredCharacters() {
+    const storageFavoritesCharacters: any =
+      localStorage.getItem("favoriteCharacters");
+
+    const storedFavoriteCharacters = JSON.parse(storageFavoritesCharacters);
+
+    setStoredCharacters(storedFavoriteCharacters);
+    setNewStoredCharacters(false);
+  }
 
   const handleNewCharacterPage = async (page: number) => {
     smoothScroll("characters");
@@ -67,6 +80,16 @@ const Home = () => {
     const newLocationPageList = await res.json();
     setLocationListInitial(newLocationPageList);
   };
+
+  useEffect(() => {
+    handleGetStoredCharacters();
+  }, [newStoredCharacters]);
+
+  useEffect(() => {
+    if (router.pathname === "/home") {
+      router.push("/");
+    }
+  }, []);
 
   const isPaginateNecessary = isSearching && searchText !== "";
 
@@ -126,6 +149,7 @@ const Home = () => {
         {episodeListInitial && (
           <>
             <TitleSection
+              onClick={() => router.push("/episode/1")}
               id="episodes"
               title="Episódios"
               isSearching={isSearching}
@@ -156,6 +180,7 @@ const Home = () => {
         {locationListInitial && (
           <>
             <TitleSection
+              onClick={() => router.push("/location/1")}
               id="locations"
               title="Localizações"
               isSearching={isSearching}

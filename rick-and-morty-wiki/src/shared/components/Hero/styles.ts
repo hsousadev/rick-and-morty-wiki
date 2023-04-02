@@ -46,4 +46,8 @@ export const Container = styled.div`
       gap: 8px;
     }
   }
+
+  @media (max-width: 1360px) {
+    padding: 64px;
+  }
 `;

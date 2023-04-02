@@ -42,9 +42,7 @@ const Hero = ({
           </>
         )}
 
-        <h1>
-          {name} <Heart size={52} color={`var(--FONT-COLOR)`} />
-        </h1>
+        <h1>{name}</h1>
       </div>
       <div className="info">
         <h3>

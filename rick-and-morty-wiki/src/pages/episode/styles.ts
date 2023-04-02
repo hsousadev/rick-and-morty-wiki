@@ -23,6 +23,17 @@ export const Content = styled.div`
     width: 100%;
     gap: 16px;
   }
+
+  @media (max-width: 1360px) {
+    padding: 24px 64px;
+
+    .episodes {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  }
 `;
 
 export const HeroContent = styled.div`

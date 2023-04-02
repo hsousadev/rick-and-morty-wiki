@@ -12,7 +12,7 @@ import {
 import { CharacterProps } from "../../interfaces";
 
 import LocationCard from "@/shared/components/LocationCard";
-import LocationCardProps from "@/shared/types/LocationCardProps";
+import { LocationCardProps } from "@/shared/types/locationCardProps";
 
 import { Container } from "./styles";
 import { useEffect, useState } from "react";
@@ -55,9 +55,7 @@ const HomeHero = ({
       <Image src={image} width={370} height={460} alt="" />
       <div className="character-info">
         <div>
-          <h1>
-            {name} <Heart />
-          </h1>
+          <h1>{name}</h1>
           <h3>
             <MonitorPlay size={32} />
             Participou de{" "}

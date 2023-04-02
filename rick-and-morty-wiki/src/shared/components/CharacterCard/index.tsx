@@ -1,7 +1,9 @@
 import { useRouter } from "next/router";
-import React from "react";
+
+import { useEffect, useState } from "react";
 
 import DefaultButton from "../DefaultButton";
+import { favoritesCharactersToSet } from "@/pages/favorites";
 
 import {
   Pulse,
@@ -14,13 +16,15 @@ import {
 
 import { Container } from "./styles";
 
-interface CharacterCardProps {
+export interface CharacterCardProps {
   id: number;
   image: string;
   name: string;
   status: string;
   species: string;
   origin: string;
+  changed?: any;
+  setChanged?: any;
 }
 
 const CharacterCard = ({
@@ -32,8 +36,60 @@ const CharacterCard = ({
   origin,
 }: CharacterCardProps) => {
   const router = useRouter();
-
   const isAlive = status === "Alive";
+
+  const [isFavorited, setIsFavorited] = useState(false);
+
+  const characterCard = {
+    id: id,
+    image: image,
+    name: name,
+    status: status,
+    species: species,
+    origin: origin,
+  };
+
+  function handleFavorite() {
+    setIsFavorited(true);
+
+    const storageFavoritesCharacters: any =
+      localStorage.getItem("favoriteCharacters");
+
+    const storedFavoriteCharacters = JSON.parse(storageFavoritesCharacters);
+
+    if (storedFavoriteCharacters) {
+      storedFavoriteCharacters.push(characterCard);
+
+      localStorage.setItem(
+        "favoriteCharacters",
+        JSON.stringify(storedFavoriteCharacters)
+      );
+    } else {
+      favoritesCharactersToSet.push(characterCard);
+
+      localStorage.setItem(
+        "favoriteCharacters",
+        JSON.stringify(favoritesCharactersToSet)
+      );
+    }
+  }
+
+  function handleFavoriteCharacterExists(card: any, list: any) {
+    var i;
+    for (i = 0; i < list?.length; i++) {
+      if (list[i]?.id === card.id) {
+        setIsFavorited(true);
+      }
+    }
+  }
+
+  useEffect(() => {
+    const storageFavoritesCharacters: any =
+      localStorage.getItem("favoriteCharacters");
+    const storedFavoriteCharacters = JSON.parse(storageFavoritesCharacters);
+
+    handleFavoriteCharacterExists(characterCard, storedFavoriteCharacters);
+  }, []);
 
   return (
     <Container>
@@ -70,9 +126,20 @@ const CharacterCard = ({
             <p>{origin === "unknown" ? "Desconhecido" : origin}</p>
           </div>
         </div>
-        <button>
-          <Heart color="#11b0c8" size={48} />
-        </button>
+        {!isFavorited ? (
+          <button>
+            <Heart
+              color={`var(--BLUE-A)`}
+              size={48}
+              onClick={() => handleFavorite()}
+            />
+          </button>
+        ) : (
+          <h4 style={{ textAlign: "end", color: `var(--BLUE-A)` }}>
+            <Heart color={`var(--BLUE-A)`} size={16} weight="fill" /> Item{" "}
+            <br /> favoritado{" "}
+          </h4>
+        )}
       </div>
       <DefaultButton
         icon={<Info size={24} color={`var(--FONT-COLOR)`} />}
