@@ -8,6 +8,7 @@ export const Container = styled.div`
     width: 100%;
     gap: 16px;
     margin: 64px 0 64px 0;
+    padding: 0;
 
     list-style: none;
 
@@ -49,6 +50,24 @@ export const Container = styled.div`
         font-size: 32px;
         border: none;
       }
+    }
+  }
+
+  @media (max-width: 720px) {
+    ul {
+      li {
+        width: 32px;
+        height: 32px;
+      }
+    }
+  }
+
+  @media (max-width: 500px) {
+    ul {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      padding: 0;
+      width: 100%;
     }
   }
 `;

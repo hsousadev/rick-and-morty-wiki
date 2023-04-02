@@ -1,14 +1,19 @@
 import { useRouter } from "next/router";
-import { useCallback, useEffect, useState } from "react";
-import { SmileyBlank } from "@phosphor-icons/react";
+import { useEffect, useState } from "react";
+import { SmileyBlank, LinkBreak } from "@phosphor-icons/react";
+
+import smoothScroll from "@/shared/utils/smoothScroll";
 
 import Hero from "./components/Hero";
-import smoothScroll from "@/shared/utils/smoothScroll";
+import Filter from "./components/Filter";
 
 import CharacterCard from "@/shared/components/CharacterCard";
 import Paginate from "@/shared/components/Paginate";
 
+import { CharacterProps, CharacterListProps } from "./interfaces";
+
 import { Container, Content, HeroContent } from "./styles";
+import MoreSection from "@/shared/components/MoreSection";
 
 export async function getStaticPaths() {
   return {
@@ -20,32 +25,40 @@ export async function getStaticPaths() {
 export async function getStaticProps() {
   const res = await fetch("https://rickandmortyapi.com/api/character");
   const characterList = await res.json();
+  const results = characterList.results;
+  const info = characterList.info;
 
   return {
     props: {
-      characterList,
+      results,
+      info,
     },
   };
 }
 
-const Character = ({ characterList }: any) => {
+const Character = ({ results, info }: CharacterListProps) => {
   const router = useRouter();
   const { character_slug } = router.query;
 
-  const [character, setCharacter] = useState<any>();
-  const [characterListData, setCharacterListData] = useState(
-    characterList?.results
-  );
+  const [character, setCharacter] = useState<CharacterProps>();
+  const [characterListData, setCharacterListData] = useState(results);
+  const [infoPage, setInfoPage] = useState(info);
+
+  const [status, setStatus] = useState("");
+  const [species, setSpecies] = useState("");
+  const [gender, setGender] = useState("");
 
   const handleNewCharacterPage = async (page: number) => {
-    smoothScroll("more-character");
-
     const pageNumber = page + 1;
+    smoothScroll("more-section");
+
     const res = await fetch(
-      `https://rickandmortyapi.com/api/character/?page=${pageNumber}`
+      `https://rickandmortyapi.com/api/character/?page=${pageNumber}&status=${status}&species=${species}&gender=${gender}`
     );
     const newCharacterPageList = await res.json();
+
     setCharacterListData(newCharacterPageList?.results);
+    setInfoPage(newCharacterPageList?.info);
   };
 
   useEffect(() => {
@@ -55,7 +68,6 @@ const Character = ({ characterList }: any) => {
       );
 
       const characterResquested = await res.json();
-
       setCharacter(characterResquested);
     };
 
@@ -67,6 +79,7 @@ const Character = ({ characterList }: any) => {
       {character && (
         <HeroContent>
           <Hero
+            id={character.id}
             name={character?.name}
             status={character?.status}
             species={character?.species}
@@ -74,40 +87,61 @@ const Character = ({ characterList }: any) => {
             origin={character?.origin}
             location={character?.location}
             image={character?.image}
-            episodes={character?.episode}
+            episode={character?.episode}
           />
         </HeroContent>
       )}
 
       <Content>
-        <div id="more-character" className="more-character">
-          <SmileyBlank size={48} color={`var(--FONT-COLOR)`} />
-          <h3>
-            Mais <br /> personagens
-          </h3>
+        <div className="section-and-filter">
+          <MoreSection
+            icon={<SmileyBlank size={48} color={`var(--FONT-COLOR)`} />}
+            text="personagens"
+          />
+
+          <Filter
+            setCharacterListData={setCharacterListData}
+            setInfoPage={setInfoPage}
+            status={status}
+            setStatus={setStatus}
+            species={species}
+            setSpecies={setSpecies}
+            gender={gender}
+            setGender={setGender}
+          />
         </div>
 
-        <div className="characters">
-          {characterListData?.map((character: any) => (
-            <CharacterCard
-              id={character?.id}
-              key={character?.id}
-              image={character?.image}
-              name={character?.name}
-              status={character?.status}
-              species={character?.species}
-              origin={character?.origin?.name}
-            />
-          ))}
-        </div>
+        {characterListData && (
+          <div className="characters">
+            {characterListData?.map((character: CharacterProps) => (
+              <CharacterCard
+                id={character?.id}
+                key={character?.id}
+                image={character?.image}
+                name={character?.name}
+                status={character?.status}
+                species={character?.species}
+                origin={character?.origin?.name}
+              />
+            ))}
+          </div>
+        )}
       </Content>
 
-      <Paginate
-        pageCount={characterList?.info?.pages}
-        onPageChange={(selectedItem: { selected: number }) =>
-          handleNewCharacterPage(selectedItem?.selected)
-        }
-      />
+      {!characterListData && (
+        <h2 style={{ marginBottom: "64px" }}>
+          <LinkBreak size={48} /> Nenhum resultado encontrado
+        </h2>
+      )}
+
+      {infoPage?.pages > 1 && (
+        <Paginate
+          pageCount={infoPage?.pages}
+          onPageChange={(selectedItem: { selected: number }) =>
+            handleNewCharacterPage(selectedItem?.selected)
+          }
+        />
+      )}
     </Container>
   );
 };

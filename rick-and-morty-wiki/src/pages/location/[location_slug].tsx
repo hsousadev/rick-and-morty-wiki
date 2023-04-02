@@ -6,12 +6,12 @@ import Hero from "@/shared/components/Hero";
 
 import { MonitorPlay } from "@phosphor-icons/react";
 
-import { EpisodeProps, EpisodeListProps } from "./interfaces";
+import { LocationProps, LocationListProps } from "./interfaces";
 
 import { Container, Content, HeroContent } from "./styles";
 import MoreSection from "@/shared/components/MoreSection";
-import EpisodeCard from "@/shared/components/EpisodeCard";
 import Paginate from "@/shared/components/Paginate";
+import LocationCard from "@/shared/components/LocationCard";
 
 export async function getStaticPaths() {
   return {
@@ -21,7 +21,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps() {
-  const res = await fetch("https://rickandmortyapi.com/api/episode");
+  const res = await fetch("https://rickandmortyapi.com/api/location");
   const episodeList = await res.json();
   const results = episodeList.results;
   const info = episodeList.info;
@@ -34,63 +34,64 @@ export async function getStaticProps() {
   };
 }
 
-const Episode = ({ results, info }: EpisodeListProps) => {
+const Location = ({ results, info }: LocationListProps) => {
   const router = useRouter();
-  const { episode_slug } = router.query;
+  const { location_slug } = router.query;
 
-  const [episode, setEpisode] = useState<EpisodeProps>();
-  const [espisodeListData, setEspisodeListData] = useState(results);
+  const [location, setLocation] = useState<LocationProps>();
+  const [locationListData, setLocationListData] = useState(results);
 
-  const handleNewEpisodePage = async (page: number) => {
+  const handleNewLocationPage = async (page: number) => {
     smoothScroll("more-section");
 
     const pageNumber = page + 1;
     const res = await fetch(
-      `https://rickandmortyapi.com/api/episode/?page=${pageNumber}`
+      `https://rickandmortyapi.com/api/location/?page=${pageNumber}`
     );
     const newEpisodePageList = await res.json();
-    setEspisodeListData(newEpisodePageList?.results);
+    setLocationListData(newEpisodePageList?.results);
   };
 
   useEffect(() => {
-    const getEpisodeRequested = async () => {
+    const getLocationRequested = async () => {
       const res = await fetch(
-        `https://rickandmortyapi.com/api/episode/${episode_slug}`
+        `https://rickandmortyapi.com/api/location/${location_slug}`
       );
 
-      const episodeResquested = await res.json();
+      const locationResquested = await res.json();
 
-      setEpisode(episodeResquested);
+      setLocation(locationResquested);
     };
 
-    getEpisodeRequested();
-  }, [episode_slug]);
+    getLocationRequested();
+  }, [location_slug]);
 
   return (
     <Container>
-      {episode && (
+      {location && (
         <HeroContent>
           <Hero
-            id={episode.id}
-            name={episode.name}
-            air_date={episode.air_date}
-            episode={episode.episode}
-            characters={episode.characters}
+            id={location.id}
+            name={location.name}
+            type={location.type}
+            dimension={location.dimension}
+            residents={location.residents}
           />
         </HeroContent>
       )}
+
       <Content>
         <MoreSection
           icon={<MonitorPlay size={48} color={`var(--FONT-COLOR)`} />}
-          text="episódios"
+          text="Localizações"
         />
 
-        <div className="episodes">
-          {espisodeListData?.map((episode: EpisodeProps) => (
-            <EpisodeCard
-              id={episode.id}
-              name={episode.name}
-              episode={episode.episode}
+        <div className="locations">
+          {locationListData?.map((location: LocationProps) => (
+            <LocationCard
+              id={location.id}
+              name={location.name}
+              type={location.type}
             />
           ))}
         </div>
@@ -99,11 +100,11 @@ const Episode = ({ results, info }: EpisodeListProps) => {
       <Paginate
         pageCount={info?.pages}
         onPageChange={(selectedItem: { selected: number }) =>
-          handleNewEpisodePage(selectedItem?.selected)
+          handleNewLocationPage(selectedItem?.selected)
         }
       />
     </Container>
   );
 };
 
-export default Episode;
+export default Location;

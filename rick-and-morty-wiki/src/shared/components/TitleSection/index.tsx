@@ -8,9 +8,17 @@ interface TitleSectionProps {
   id: string;
   title: string;
   onClick?: () => void;
+  isSearching?: boolean;
+  resultsCount?: number;
 }
 
-const TitleSection = ({ title, id, onClick }: TitleSectionProps) => {
+const TitleSection = ({
+  title,
+  id,
+  onClick,
+  isSearching,
+  resultsCount,
+}: TitleSectionProps) => {
   return (
     <Container id={id}>
       <h3>{title}</h3>
@@ -19,6 +27,9 @@ const TitleSection = ({ title, id, onClick }: TitleSectionProps) => {
         text="Ver todos"
         onClick={onClick}
       />
+      {isSearching && (
+        <h4>{resultsCount ? resultsCount : "0"} resultados encontrados</h4>
+      )}
     </Container>
   );
 };

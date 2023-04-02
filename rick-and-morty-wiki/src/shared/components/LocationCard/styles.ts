@@ -23,6 +23,7 @@ export const Content = styled.div`
   border-radius: 16px;
   padding: 16px;
   width: 152px;
+  height: 190px;
 
   > h4 {
     text-align: center;

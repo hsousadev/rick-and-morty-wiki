@@ -51,7 +51,7 @@ const CharacterCard = ({
             ) : (
               <>
                 <Skull color={`var(--RED)`} />
-                <p>Vivo(a)</p>
+                <p>Morto(a)</p>
               </>
             )}
           </div>

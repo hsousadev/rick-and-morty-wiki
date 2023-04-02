@@ -5,20 +5,20 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  border-top: 1px solid var(--BLUE-A);
 `;
 
 export const Content = styled.div`
   width: 100%;
   max-width: var(--MAX-CONTENT-WIDTH);
 
-  border-top: 1px solid var(--FONT-COLOR);
-
   .logo-and-return-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    padding: 7.5rem 0 4rem 0;
+    padding: 120px 0 64px 0;
     border-bottom: 1px solid var(--FONT-COLOR);
 
     .return-top {
@@ -27,7 +27,7 @@ export const Content = styled.div`
         align-items: center;
         justify-content: space-between;
         padding: 0;
-        gap: 0.5rem;
+        gap: 8px;
 
         :hover {
           svg {
@@ -44,7 +44,7 @@ export const Content = styled.div`
   }
 
   .copyrights {
-    padding: 1.5rem 0 4rem 0;
+    padding: 24px 0 64px 0;
 
     display: flex;
     align-items: center;
@@ -54,7 +54,7 @@ export const Content = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
+      gap: 8px;
       color: var(--FONT-COLOR);
 
       strong {
@@ -75,13 +75,13 @@ export const Content = styled.div`
   @media (max-width: 768px) {
     .logo-and-return-top {
       flex-direction: column-reverse;
-      gap: 2rem;
-      padding: 2rem;
+      gap: 32px;
+      padding: 32px;
     }
 
     .copyrights {
       flex-direction: column;
-      gap: 1rem;
+      gap: 16px;
 
       h4 {
         text-align: center;

@@ -1,4 +1,4 @@
-import React from "react";
+import { useRouter } from "next/router";
 
 import { Planet, Info, Heart, MapPin } from "@phosphor-icons/react";
 
@@ -7,7 +7,9 @@ import DefaultButton from "../DefaultButton";
 
 import { Container, Content } from "./styles";
 
-const LocationCard = ({ type, name }: LocationCardProps) => {
+const LocationCard = ({ id, type, name }: LocationCardProps) => {
+  const router = useRouter();
+
   return (
     <Container>
       {name && (
@@ -23,6 +25,7 @@ const LocationCard = ({ type, name }: LocationCardProps) => {
             <DefaultButton
               icon={<Info size={24} color={`var(--FONT-COLOR)`} />}
               text="Saiba mais"
+              onClick={() => router.push(`/location/${id}`)}
             />
             <button>
               <Heart size={32} color={`var(--FONT-COLOR)`} />

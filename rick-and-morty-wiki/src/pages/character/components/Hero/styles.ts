@@ -55,4 +55,56 @@ export const Container = styled.div`
       gap: 32px;
     }
   }
+
+  @media (max-width: 1360px) {
+    padding: 64px;
+  }
+
+  @media (max-width: 1024px) {
+    img {
+      align-self: flex-start;
+    }
+    flex-direction: column;
+    align-items: center;
+
+    .character-info {
+      margin-top: 24px;
+      margin-left: 0;
+
+      .cards {
+        justify-content: space-between;
+        gap: 0;
+      }
+    }
+  }
+
+  @media (max-width: 720px) {
+    padding: 32px;
+  }
+
+  @media (max-width: 500px) {
+    padding: 32px;
+    img {
+      width: 100%;
+      height: 300px;
+    }
+
+    .character-info {
+      h1 {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+      }
+
+      .cards {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .details {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+    }
+  }
 `;

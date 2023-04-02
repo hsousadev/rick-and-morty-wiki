@@ -13,12 +13,12 @@ export const Content = styled.div`
   max-width: var(--MAX-CONTENT-WIDTH);
   width: 100%;
 
-  .episodes {
+  .locations {
     display: grid;
     align-items: center;
     justify-content: space-between;
 
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(7, 1fr);
 
     width: 100%;
     gap: 16px;

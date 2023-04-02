@@ -9,7 +9,7 @@ import {
   Skull,
 } from "@phosphor-icons/react";
 
-import CharacterProps from "../../interface";
+import { CharacterProps } from "../../interfaces";
 
 import LocationCard from "@/shared/components/LocationCard";
 import LocationCardProps from "@/shared/types/LocationCardProps";
@@ -25,7 +25,7 @@ const HomeHero = ({
   origin,
   location,
   image,
-  episodes,
+  episode,
 }: CharacterProps) => {
   const [originCardInfo, setOriginCardInfo] = useState<LocationCardProps>();
   const [locationCardInfo, setLocationCardInfo] = useState<LocationCardProps>();
@@ -61,8 +61,8 @@ const HomeHero = ({
           <h3>
             <MonitorPlay size={32} />
             Participou de{" "}
-            {episodes?.length > 1
-              ? episodes?.length + " episódios"
+            {episode?.length > 1
+              ? episode?.length + " episódios"
               : "1 episódio"}
           </h3>
           <div className="details">
@@ -107,6 +107,7 @@ const HomeHero = ({
           {isLocationCardEquals ? (
             <>
               <LocationCard
+                id={originCardInfo?.id}
                 name={originCardInfo?.name}
                 type={originCardInfo?.type}
               />
@@ -114,10 +115,12 @@ const HomeHero = ({
           ) : (
             <>
               <LocationCard
+                id={originCardInfo?.id}
                 name={originCardInfo?.name}
                 type={originCardInfo?.type}
               />
               <LocationCard
+                id={locationCardInfo?.id}
                 name={locationCardInfo?.name}
                 type={locationCardInfo?.type}
               />

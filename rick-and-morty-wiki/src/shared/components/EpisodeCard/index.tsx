@@ -1,3 +1,5 @@
+import { useRouter } from "next/router";
+
 import { MonitorPlay, Info, Heart } from "@phosphor-icons/react";
 
 import DefaultButton from "../DefaultButton";
@@ -11,6 +13,8 @@ interface EpisodeCardProps {
 }
 
 const EpisodeCard = ({ id, name, episode }: EpisodeCardProps) => {
+  const router = useRouter();
+
   return (
     <Container>
       <div>
@@ -23,6 +27,7 @@ const EpisodeCard = ({ id, name, episode }: EpisodeCardProps) => {
         <DefaultButton
           icon={<Info size={24} color={`var(--FONT-COLOR)`} />}
           text="Saiba mais"
+          onClick={() => router.push(`/episode/${id}`)}
         />
         <button>
           <Heart size={32} color={`var(--FONT-COLOR)`} />

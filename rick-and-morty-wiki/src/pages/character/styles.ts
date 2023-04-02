@@ -17,14 +17,14 @@ export const Content = styled.div`
   justify-content: center;
   flex-direction: column;
 
-  .more-character {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
+  margin-bottom: 24px;
 
+  .section-and-filter {
     width: 100%;
-    padding: 48px 0 64px 0;
-    gap: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
   }
 
   .characters {
@@ -37,6 +37,26 @@ export const Content = styled.div`
     width: 100%;
     gap: 16px;
   }
+
+  @media (max-width: 1360px) {
+    padding: 0 64px;
+
+    .more-section {
+      padding: 32px 0;
+    }
+
+    .characters {
+      display: flex;
+      justify-content: center;
+      flex-direction: row;
+
+      flex-wrap: wrap;
+    }
+  }
+
+  @media (max-width: 720px) {
+    padding: 32px;
+  }
 `;
 
 export const HeroContent = styled.div`
@@ -45,5 +65,5 @@ export const HeroContent = styled.div`
   align-items: center;
   justify-content: center;
 
-  border-bottom: solid var(--BLUE-A);
+  border-bottom: 1px solid var(--BLUE-A);
 `;

@@ -34,6 +34,7 @@ export const Container = styled.div<ContatinerProps>`
   }
 
   input[type="search"] {
+    appearance: none;
     font-size: 16px;
   }
 

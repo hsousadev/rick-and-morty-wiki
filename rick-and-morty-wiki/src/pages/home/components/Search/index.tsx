@@ -1,18 +1,57 @@
-import React, { useState, useContext } from "react";
+import React, { useContext, SetStateAction, Dispatch } from "react";
 
 import { MagnifyingGlass } from "@phosphor-icons/react";
-
 import { GlobalContext } from "@/pages/_app";
 
 import { Container } from "./styles";
+import { CharacterListProps } from "@/pages/character/interfaces";
+import { EpisodeListProps } from "@/pages/episode/interfaces";
+import { LocationListProps } from "@/pages/location/interfaces";
 
-const Search = () => {
+interface SearchProps {
+  setCharacterListInitial: Dispatch<SetStateAction<CharacterListProps>>;
+  setEpisodeListInitial: Dispatch<SetStateAction<EpisodeListProps>>;
+  setLocationListInitial: Dispatch<SetStateAction<LocationListProps>>;
+  setIsSearching: Dispatch<SetStateAction<boolean>>;
+  setSearchText: Dispatch<SetStateAction<string>>;
+  searchText: string;
+}
+
+const Search = ({
+  setCharacterListInitial,
+  setEpisodeListInitial,
+  setLocationListInitial,
+  setIsSearching,
+  setSearchText,
+  searchText,
+}: SearchProps) => {
   const { darkTheme } = useContext(GlobalContext);
-  const [searchText, setSearchText] = useState("");
 
-  const handleSearch = (event: any) => {
-    if (event.key === "Enter") {
-      console.log(searchText);
+  const handleSearch = async (event: any) => {
+    if (event.key === "Enter" || event.type === "click") {
+      if (searchText === "") {
+        setIsSearching(false);
+      } else {
+        setIsSearching(true);
+      }
+
+      const resCharacterSearch = await fetch(
+        `https://rickandmortyapi.com/api/character/?name=${searchText}`
+      );
+      const characterSearched = await resCharacterSearch.json();
+      setCharacterListInitial(characterSearched);
+
+      const resEpisodeSearch = await fetch(
+        `https://rickandmortyapi.com/api/episode/?name=${searchText}`
+      );
+      const episodeSearched = await resEpisodeSearch.json();
+      setEpisodeListInitial(episodeSearched);
+
+      const resLocationSearch = await fetch(
+        `https://rickandmortyapi.com/api/location/?name=${searchText}`
+      );
+      const locationSearched = await resLocationSearch.json();
+      if (locationSearched) setLocationListInitial(locationSearched);
     }
   };
 
@@ -21,18 +60,21 @@ const Search = () => {
   };
 
   return (
-    <Container isDarkTheme={darkTheme}>
-      <input
-        id="search"
-        type="search"
-        placeholder="Personagens, episódios ou localizações"
-        onChange={handleInputText}
-        onKeyDown={handleSearch}
-      />
-      <button>
-        <MagnifyingGlass color={`var(--FONT-COLOR)`} size={32} />
-      </button>
-    </Container>
+    <>
+      <Container isDarkTheme={darkTheme}>
+        <input
+          id="search"
+          type="search"
+          placeholder="Personagens, episódios ou localizações"
+          onChange={handleInputText}
+          onKeyDown={handleSearch}
+          maxLength={30}
+        />
+        <button id="doSearch" onClick={(e) => handleSearch(e)}>
+          <MagnifyingGlass color={`var(--FONT-COLOR)`} size={32} />
+        </button>
+      </Container>
+    </>
   );
 };
 
