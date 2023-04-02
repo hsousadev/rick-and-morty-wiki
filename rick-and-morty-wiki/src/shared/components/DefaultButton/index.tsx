@@ -1,7 +1,7 @@
 import { useContext, HTMLAttributes } from "react";
 
 import { Container } from "./styles";
-import { GlobalContext } from "../../../pages/_app";
+import { GlobalContext } from "../../../pages/_app.page";
 
 interface DefaultButtonProps extends HTMLAttributes<HTMLButtonElement> {
   icon: any;

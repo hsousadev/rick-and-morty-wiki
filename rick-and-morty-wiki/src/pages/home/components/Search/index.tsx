@@ -1,7 +1,7 @@
 import React, { useContext, SetStateAction, Dispatch } from "react";
 
 import { MagnifyingGlass } from "@phosphor-icons/react";
-import { GlobalContext } from "@/pages/_app";
+import { GlobalContext } from "@/pages/_app.page";
 
 import { Container } from "./styles";
 import CharacterListProps from "@/pages/character/interfaces";

@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 import DefaultButton from "../DefaultButton";
-import { favoritesCharactersToSet } from "@/pages/favorites";
+import { favoritesCharactersToSet } from "@/pages/favorites/index.page";
 
 import {
   Pulse,

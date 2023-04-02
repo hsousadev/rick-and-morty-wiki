@@ -4,7 +4,7 @@ import { Planet, Info, Heart, MapPin } from "@phosphor-icons/react";
 
 import { LocationCardProps } from "@/shared/types/locationCardProps";
 import DefaultButton from "../DefaultButton";
-import { favoritesLocationsToSet } from "@/pages/favorites";
+import { favoritesLocationsToSet } from "@/pages/favorites/index.page";
 
 import { Container, Content } from "./styles";
 import { useEffect, useState } from "react";

@@ -11,7 +11,7 @@ import DefaultButton from "../DefaultButton";
 import { Heart, HouseSimple, Moon, Sun } from "@phosphor-icons/react";
 
 import { Container, Content } from "./styles";
-import { GlobalContext } from "@/pages/_app";
+import { GlobalContext } from "@/pages/_app.page";
 
 const TopBar = () => {
   const { darkTheme, setDarkTheme } = useContext(GlobalContext);

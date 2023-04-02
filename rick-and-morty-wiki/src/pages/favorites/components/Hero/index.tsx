@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Heart } from "@phosphor-icons/react";
 
 import HighlightImage from "@/shared/assets/images/rick-and-morty-fav.png";
-import { GlobalContext } from "@/pages/_app";
+import { GlobalContext } from "@/pages/_app.page";
 
 import { Container } from "./styles";
 

@@ -17,7 +17,7 @@ import LocationCard from "@/shared/components/LocationCard";
 import { LocationCardProps } from "@/shared/types/locationCardProps";
 import DefaultButton from "@/shared/components/DefaultButton";
 import { XCircle } from "@phosphor-icons/react";
-import { GlobalContext } from "../_app";
+import { GlobalContext } from "../_app.page";
 
 export let favoritesCharactersToSet: any = [];
 export const favoritesEpisodesToSet: any = [];

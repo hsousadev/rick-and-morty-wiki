@@ -5,7 +5,7 @@ import DarkThemeHeroImage from "@/shared/assets/images/hero-image-dark.png";
 import WhiteThemeHeroImage from "@/shared/assets/images/hero-image-white.png";
 
 import { Moon, Sun } from "@phosphor-icons/react";
-import { GlobalContext } from "@/pages/_app";
+import { GlobalContext } from "@/pages/_app.page";
 
 import DefaultButton from "@/shared/components/DefaultButton";
 

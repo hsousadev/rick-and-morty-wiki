@@ -11,7 +11,7 @@ import EpisodeCard from "@/shared/components/EpisodeCard";
 import LocationCard from "@/shared/components/LocationCard";
 import Paginate from "@/shared/components/Paginate";
 
-import { GlobalContext } from "@/pages/_app";
+import { GlobalContext } from "@/pages/_app.page";
 
 import HomeContext from "./context";
 

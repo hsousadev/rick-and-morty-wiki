@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { MonitorPlay, Info, Heart } from "@phosphor-icons/react";
 
 import DefaultButton from "../DefaultButton";
-import { favoritesEpisodesToSet } from "@/pages/favorites";
+import { favoritesEpisodesToSet } from "@/pages/favorites/index.page";
 
 import { Container } from "./styles";
 import { useEffect, useState } from "react";

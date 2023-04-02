@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Home from "./home";
+import Home from "./home/index.page";
 
 import HomeContext, { HomeContextProps } from "../pages/home/context";
 
