@@ -1,10 +1,9 @@
 import { createContext } from "react";
-import { CharacterListProps } from "../character/interfaces";
 import { EpisodeListProps } from "../episode/interfaces";
 import { LocationListProps } from "../location/interfaces";
 
 export interface HomeContextProps {
-  characterList: CharacterListProps;
+  characterList: any;
   episodeList: EpisodeListProps;
   locationList: LocationListProps;
 }

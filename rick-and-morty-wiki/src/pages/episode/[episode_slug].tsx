@@ -88,6 +88,7 @@ const Episode = ({ results, info }: EpisodeListProps) => {
         <div className="episodes">
           {espisodeListData?.map((episode: EpisodeProps) => (
             <EpisodeCard
+              key={episode.id}
               id={episode.id}
               name={episode.name}
               episode={episode.episode}

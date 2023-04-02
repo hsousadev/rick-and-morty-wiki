@@ -89,6 +89,7 @@ const Location = ({ results, info }: LocationListProps) => {
         <div className="locations">
           {locationListData?.map((location: LocationProps) => (
             <LocationCard
+              key={location.id}
               id={location.id}
               name={location.name}
               type={location.type}
