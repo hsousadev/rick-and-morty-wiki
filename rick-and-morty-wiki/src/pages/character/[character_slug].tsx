@@ -10,7 +10,8 @@ import Filter from "./components/Filter";
 import CharacterCard from "@/shared/components/CharacterCard";
 import Paginate from "@/shared/components/Paginate";
 
-import { CharacterProps, CharacterListProps } from "./interfaces";
+import CharacterProps from "./interfaces";
+import CharacterListProps from "./interfaces";
 
 import { Container, Content, HeroContent } from "./styles";
 import MoreSection from "@/shared/components/MoreSection";
@@ -88,6 +89,12 @@ const Character = ({ results, info }: CharacterListProps) => {
             location={character?.location}
             image={character?.image}
             episode={character?.episode}
+            info={{
+              pages: 0,
+              count: 0,
+              next: "",
+            }}
+            results={[]}
           />
         </HeroContent>
       )}

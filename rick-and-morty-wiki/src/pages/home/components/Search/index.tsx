@@ -4,7 +4,7 @@ import { MagnifyingGlass } from "@phosphor-icons/react";
 import { GlobalContext } from "@/pages/_app";
 
 import { Container } from "./styles";
-import { CharacterListProps } from "@/pages/character/interfaces";
+import CharacterListProps from "@/pages/character/interfaces";
 import { EpisodeListProps } from "@/pages/episode/interfaces";
 import { LocationListProps } from "@/pages/location/interfaces";
 

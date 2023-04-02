@@ -15,7 +15,7 @@ import {
 } from "@phosphor-icons/react";
 
 import { Container } from "./styles";
-import { CharacterProps } from "../../interfaces";
+import CharacterProps from "../../interfaces";
 
 interface FilterProps {
   setCharacterListData: Dispatch<SetStateAction<CharacterProps[]>>;

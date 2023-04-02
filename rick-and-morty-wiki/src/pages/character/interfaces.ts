@@ -1,4 +1,6 @@
-export interface CharacterProps {
+import React from "react";
+
+export default interface CharacterProps {
   id: number;
   name: string;
   status: string;
@@ -15,7 +17,7 @@ export interface CharacterProps {
   episode: Array<string>;
 }
 
-export interface CharacterListProps {
+export default interface CharacterListProps {
   info: {
     pages: number;
     count: number;

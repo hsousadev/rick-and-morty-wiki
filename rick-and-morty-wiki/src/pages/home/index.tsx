@@ -16,7 +16,7 @@ import { GlobalContext } from "@/pages/_app";
 import HomeContext from "./context";
 
 import { Container, HeroContent, Content } from "./styles";
-import { CharacterProps } from "../character/interfaces";
+import CharacterProps from "../character/interfaces";
 import { EpisodeProps } from "../episode/interfaces";
 import { LocationProps } from "../location/interfaces";
 import smoothScroll from "@/shared/utils/smoothScroll";

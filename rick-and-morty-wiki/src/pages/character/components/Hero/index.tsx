@@ -9,7 +9,7 @@ import {
   Skull,
 } from "@phosphor-icons/react";
 
-import { CharacterProps } from "../../interfaces";
+import CharacterProps from "../../interfaces";
 
 import LocationCard from "@/shared/components/LocationCard";
 import { LocationCardProps } from "@/shared/types/locationCardProps";
