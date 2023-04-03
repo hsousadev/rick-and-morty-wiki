@@ -15,6 +15,7 @@ import {
 } from "@phosphor-icons/react";
 
 import { Container } from "./styles";
+import Link from "next/link";
 
 export interface CharacterCardProps {
   id: number;
@@ -141,11 +142,12 @@ const CharacterCard = ({
           </h4>
         )}
       </div>
-      <DefaultButton
-        icon={<Info size={24} color={`var(--FONT-COLOR)`} />}
-        text="Saiba Mais"
-        onClick={() => router.push(`/character/${id}`)}
-      />
+      <Link href={`/character/${id}`}>
+        <DefaultButton
+          icon={<Info size={24} color={`var(--FONT-COLOR)`} />}
+          text="Saiba Mais"
+        />
+      </Link>
     </Container>
   );
 };
