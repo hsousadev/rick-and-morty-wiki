@@ -3,6 +3,9 @@
 
 ![rick-and-morty](https://user-images.githubusercontent.com/54003876/229385071-92694ca7-ca83-4c9a-b316-ef3a6b27640a.png)
 
+## 🌐 Site Online: 
+https://rickandmortysite.vercel.app/
+
 ## 🎨 Figma: 
 
 Link do protótipo: https://www.figma.com/file/OGfZiChmbX5CGc0Ls7MCuW/Rick-and-Morty?node-id=135%3A10918&t=gLM3f0fuYEfF7omd-1
