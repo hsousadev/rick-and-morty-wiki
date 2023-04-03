@@ -1,5 +1,3 @@
-import React from "react";
-
 export default interface CharacterProps {
   id: number;
   name: string;
