@@ -1,21 +1,11 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
 import DefaultButton from "@/shared/components/DefaultButton";
-import smoothScroll from "@/shared/utils/smoothScroll";
 
-import {
-  Pulse,
-  Skull,
-  Alien,
-  GenderMale,
-  GenderFemale,
-  Question,
-  Robot,
-  Person,
-  XCircle,
-} from "@phosphor-icons/react";
+import { Icons } from "./icons"
 
 import { Container } from "./styles";
 import CharacterProps from "../../interfaces";
+import { GlobalContext } from "@/pages/_app.page";
 
 interface FilterProps {
   setCharacterListData: Dispatch<SetStateAction<CharacterProps[]>>;
@@ -40,6 +30,9 @@ const Filter = ({
   setGender,
   gender,
 }: FilterProps) => {
+
+  const { darkTheme } = useContext(GlobalContext)
+
   async function handleFilter() {
     const resCharacterFilter = await fetch(
       `https://rickandmortyapi.com/api/character/?status=${status}&species=${species}&gender=${gender}`
@@ -69,25 +62,13 @@ const Filter = ({
         <h4>Status:</h4>
         <div className="filters">
           <DefaultButton
-            icon={
-              <Pulse
-                size={24}
-                color={
-                  status === "alive" ? `var(--WHITE)` : `var(--FONT-COLOR)`
-                }
-              />
-            }
+            icon={darkTheme ? Icons.WhitePulse : Icons.DarkPulse}
             text="Vivo"
             onClick={() => setStatus("alive")}
             selected={status === "alive"}
           />
           <DefaultButton
-            icon={
-              <Skull
-                size={24}
-                color={status === "dead" ? `var(--WHITE)` : `var(--FONT-COLOR)`}
-              />
-            }
+            icon={darkTheme ? Icons.WhiteSkull : Icons.DarkSkull}
             text="Morto"
             onClick={() => setStatus("dead")}
             selected={status === "dead"}
@@ -98,53 +79,25 @@ const Filter = ({
         <h4>Espécie:</h4>
         <div className="filters">
           <DefaultButton
-            icon={
-              <Person
-                size={24}
-                color={
-                  species === "human" ? `var(--WHITE)` : `var(--FONT-COLOR)`
-                }
-              />
-            }
+            icon={darkTheme ? Icons.WhitePerson : Icons.DarkPerson}
             text="Humano"
             onClick={() => setSpecies("human")}
             selected={species === "human"}
           />
           <DefaultButton
-            icon={
-              <Alien
-                size={24}
-                color={
-                  species === "alien" ? `var(--WHITE)` : `var(--FONT-COLOR)`
-                }
-              />
-            }
+            icon={darkTheme ? Icons.WhiteAlien : Icons.DarkAlien}
             text="Alien"
             onClick={() => setSpecies("alien")}
             selected={species === "alien"}
           />
           <DefaultButton
-            icon={
-              <Robot
-                size={24}
-                color={
-                  species === "robot" ? `var(--WHITE)` : `var(--FONT-COLOR)`
-                }
-              />
-            }
+            icon={darkTheme ? Icons.WhiteRobot : Icons.DarkRobot}
             text="Robo"
             onClick={() => setSpecies("robot")}
             selected={species === "robot"}
           />
           <DefaultButton
-            icon={
-              <Question
-                size={24}
-                color={
-                  species === "unknown" ? `var(--WHITE)` : `var(--FONT-COLOR)`
-                }
-              />
-            }
+            icon={darkTheme ? Icons.WhiteQuestion : Icons.DarkQuestion}
             text="Desconhecido"
             onClick={() => setSpecies("unknown")}
             selected={species === "unknown"}
@@ -155,38 +108,19 @@ const Filter = ({
         <h4>Genero:</h4>
         <div className="filters">
           <DefaultButton
-            icon={
-              <GenderMale
-                size={24}
-                color={gender === "male" ? `var(--WHITE)` : `var(--FONT-COLOR)`}
-              />
-            }
+            icon={darkTheme ? Icons.WhiteGenderMale : Icons.DarkGenderMale}
             text="Masculino"
             onClick={() => setGender("male")}
             selected={gender === "male"}
           />
           <DefaultButton
-            icon={
-              <GenderFemale
-                size={24}
-                color={
-                  gender === "female" ? `var(--WHITE)` : `var(--FONT-COLOR)`
-                }
-              />
-            }
+            icon={darkTheme ? Icons.WhiteGenderFemale : Icons.DarkGenderFemale}
             text="Feminino"
             onClick={() => setGender("female")}
             selected={gender === "female"}
           />
           <DefaultButton
-            icon={
-              <Question
-                size={24}
-                color={
-                  gender === "unknown" ? `var(--WHITE)` : `var(--FONT-COLOR)`
-                }
-              />
-            }
+            icon={darkTheme ? Icons.WhiteQuestion : Icons.DarkQuestion}
             text="Desconhecido"
             onClick={() => setGender("unknown")}
             selected={gender === "unknown"}
@@ -195,8 +129,8 @@ const Filter = ({
       </div>
       {isFiltering && (
         <DefaultButton
-          icon={<XCircle size={24} color={`var(--FONT-COLOR)`} />}
-          text="Limpar filtros"
+        icon={darkTheme ? Icons.WhiteXCircle : Icons.DarkXCircle}  
+        text="Limpar filtros"
           onClick={() => handleClearFilter()}
         />
       )}

@@ -1,15 +1,10 @@
-import { EpisodeProps } from "@/pages/episode/interfaces";
-import {
-  Heart,
-  CalendarBlank,
-  Queue,
-  SmileyBlank,
-  CubeFocus,
-  MonitorPlay,
-  Planet,
-} from "@phosphor-icons/react";
+import Image from "next/image";
 
 import { Container } from "./styles";
+
+import { Icons } from "./icons";
+import { GlobalContext } from "@/pages/_app.page";
+import { useContext } from "react";
 
 interface HeroProps {
   id: number;
@@ -31,15 +26,32 @@ const Hero = ({
   dimension,
   residents,
 }: HeroProps) => {
+  const { darkTheme } = useContext(GlobalContext);
+
   return (
     <Container>
       <div className="episode">
         {episode ? (
-          <MonitorPlay size={72} color={`var(--FONT-COLOR)`} />
+          <Image
+            src={darkTheme ? Icons.WhiteMonitorPlay : Icons.DarkMonitorPlay}
+            width={72}
+            height={72}
+            alt=""
+          />
+        ) : type === "Planet" ? (
+          <Image
+            src={darkTheme ? Icons.WhitePlanet : Icons.DarkPlanet}
+            width={72}
+            height={72}
+            alt=""
+          />
         ) : (
-          <>
-            <Planet size={72} color={`var(--FONT-COLOR)`} />
-          </>
+          <Image
+            src={darkTheme ? Icons.WhiteMapPin : Icons.DarkMapPin}
+            width={72}
+            height={72}
+            alt=""
+          />
         )}
 
         <h1>{name}</h1>
@@ -48,12 +60,34 @@ const Hero = ({
         <h3>
           {episode ? (
             <>
-              <CalendarBlank color={`var(--FONT-COLOR)`} size={32} />
+              <Image
+                src={
+                  darkTheme ? Icons.WhiteCalendarBlank : Icons.DarkCalendarBlank
+                }
+                width={32}
+                height={32}
+                alt=""
+              />
               {air_date}
+            </>
+          ) : type === "Planet" ? (
+            <>
+              <Image
+                src={darkTheme ? Icons.WhitePlanet : Icons.DarkPlanet}
+                width={32}
+                height={32}
+                alt=""
+              />
+              {type}
             </>
           ) : (
             <>
-              <Planet color={`var(--FONT-COLOR)`} size={32} />
+              <Image
+                src={darkTheme ? Icons.WhiteMapPin : Icons.DarkMapPin}
+                width={32}
+                height={32}
+                alt=""
+              />
               {type}
             </>
           )}
@@ -61,12 +95,22 @@ const Hero = ({
         <h3>
           {episode ? (
             <>
-              <Queue color={`var(--FONT-COLOR)`} size={32} />
+              <Image
+                src={darkTheme ? Icons.WhiteQueue : Icons.DarkQueue}
+                width={32}
+                height={32}
+                alt=""
+              />
               {episode}
             </>
           ) : (
             <>
-              <CubeFocus color={`var(--FONT-COLOR)`} size={32} />{" "}
+              <Image
+                src={darkTheme ? Icons.WhiteCubeFocus : Icons.DarkCubeFocus}
+                width={32}
+                height={32}
+                alt=""
+              />
               {dimension === "unknown" ? "Dimensão desconhecida" : dimension}
             </>
           )}
@@ -76,13 +120,23 @@ const Hero = ({
         <h3>
           {episode ? (
             <>
-              <SmileyBlank size={32} /> {characters?.length} Personagens
-              participaram deste episódio
+              <Image
+                src={darkTheme ? Icons.WhiteSmileyBlank : Icons.DarkSmileyBlank}
+                width={32}
+                height={32}
+                alt=""
+              />
+              {characters?.length} Personagens participaram deste episódio
             </>
           ) : (
             <>
-              <SmileyBlank size={32} /> {residents?.length} Personagens estão
-              localizados aqui
+              <Image
+                src={darkTheme ? Icons.WhiteSmileyBlank : Icons.DarkSmileyBlank}
+                width={32}
+                height={32}
+                alt=""
+              />
+              {residents?.length} Personagens estão localizados aqui
             </>
           )}
         </h3>

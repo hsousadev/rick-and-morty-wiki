@@ -1,6 +1,8 @@
+import Image from "next/image";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { SmileyBlank, LinkBreak } from "@phosphor-icons/react";
+import { useContext, useEffect, useState } from "react";
+
+import { Icons } from "./icons";
 
 import smoothScroll from "@/shared/utils/smoothScroll";
 
@@ -15,6 +17,7 @@ import CharacterListProps from "./interfaces";
 
 import { Container, Content, HeroContent } from "./styles";
 import MoreSection from "@/shared/components/MoreSection";
+import { GlobalContext } from "../_app.page";
 
 export async function getStaticPaths() {
   return {
@@ -40,6 +43,7 @@ export async function getStaticProps() {
 const Character = ({ results, info }: CharacterListProps) => {
   const router = useRouter();
   const { character_slug } = router.query;
+  const { darkTheme } = useContext(GlobalContext);
 
   const [character, setCharacter] = useState<CharacterProps>();
   const [characterListData, setCharacterListData] = useState(results);
@@ -102,7 +106,7 @@ const Character = ({ results, info }: CharacterListProps) => {
       <Content>
         <div className="section-and-filter">
           <MoreSection
-            icon={<SmileyBlank size={48} color={`var(--FONT-COLOR)`} />}
+            icon={darkTheme ? Icons.WhiteSmileyBlank : Icons.DarkSmileyBlank}
             text="personagens"
           />
 
@@ -137,7 +141,12 @@ const Character = ({ results, info }: CharacterListProps) => {
 
       {!characterListData && (
         <h2 style={{ marginBottom: "64px" }}>
-          <LinkBreak size={48} /> Nenhum resultado encontrado
+          <Image
+            src={darkTheme ? Icons.WhiteLinkBreak : Icons.DarkLinkBreak}
+            width={48}
+            height={48}
+            alt=""
+          />
         </h2>
       )}
 

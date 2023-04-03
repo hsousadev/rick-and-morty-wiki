@@ -1,8 +1,11 @@
+import { useContext } from "react";
 import ReactPaginate from "react-paginate";
+import Image from "next/image";
 
-import { CaretRight, CaretLeft } from "@phosphor-icons/react";
+import { Icons } from "./icons";
 
 import { Container } from "./styles";
+import { GlobalContext } from "@/pages/_app.page";
 
 interface PaginateProps {
   pageCount: number;
@@ -10,13 +13,29 @@ interface PaginateProps {
 }
 
 const Paginate = ({ pageCount, onPageChange }: PaginateProps) => {
+  const { darkTheme } = useContext(GlobalContext);
+
   return (
     <Container>
       <ReactPaginate
         pageCount={pageCount}
         onPageChange={onPageChange}
-        nextLabel={<CaretRight />}
-        previousLabel={<CaretLeft />}
+        nextLabel={
+          <Image
+            width={32}
+            height={32}
+            src={darkTheme ? Icons.WhiteCaretRight : Icons.DarkCaretRight}
+            alt=""
+          />
+        }
+        previousLabel={
+          <Image
+            width={32}
+            height={32}
+            src={darkTheme ? Icons.WhiteCaretLeft : Icons.DarkCaretLeft}
+            alt=""
+          />
+        }
         pageRangeDisplayed={1}
       />
     </Container>

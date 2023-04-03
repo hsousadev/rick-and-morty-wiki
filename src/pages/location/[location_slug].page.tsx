@@ -1,10 +1,10 @@
 import smoothScroll from "@/shared/utils/smoothScroll";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import Hero from "@/shared/components/Hero";
 
-import { MonitorPlay } from "@phosphor-icons/react";
+import { Icons } from "./icons";
 
 import { LocationProps, LocationListProps } from "./interfaces";
 
@@ -12,6 +12,7 @@ import { Container, Content, HeroContent } from "./styles";
 import MoreSection from "@/shared/components/MoreSection";
 import Paginate from "@/shared/components/Paginate";
 import LocationCard from "@/shared/components/LocationCard";
+import { GlobalContext } from "../_app.page";
 
 export async function getStaticPaths() {
   return {
@@ -37,6 +38,7 @@ export async function getStaticProps() {
 const Location = ({ results, info }: LocationListProps) => {
   const router = useRouter();
   const { location_slug } = router.query;
+  const { darkTheme } = useContext(GlobalContext);
 
   const [location, setLocation] = useState<LocationProps>();
   const [locationListData, setLocationListData] = useState(results);
@@ -82,7 +84,7 @@ const Location = ({ results, info }: LocationListProps) => {
 
       <Content>
         <MoreSection
-          icon={<MonitorPlay size={48} color={`var(--FONT-COLOR)`} />}
+          icon={darkTheme ? Icons.WhiteMonitorPlay : Icons.DarkMonitorPlay}
           text="Localizações"
         />
 

@@ -18,7 +18,7 @@ export const Container = styled.div`
     background-color: var(--CARD-BACKGROUND-HOVER);
   }
 
-  img {
+  > img {
     width: 100%;
     object-fit: cover;
     border-radius: 16px;

@@ -1,8 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
-import { Container, Content, HeroContent } from "./styles";
-
 import Hero from "./components/Hero";
 import TitleSection from "@/shared/components/TitleSection";
 import Filter from "@/shared/components/Filter";
@@ -15,13 +13,17 @@ import { EpisodeCardProps } from "@/shared/types/episodeCardProps";
 
 import LocationCard from "@/shared/components/LocationCard";
 import { LocationCardProps } from "@/shared/types/locationCardProps";
+
 import DefaultButton from "@/shared/components/DefaultButton";
-import { XCircle } from "@phosphor-icons/react";
 import { GlobalContext } from "../_app.page";
+
+import { Icons } from "./icons";
 
 export let favoritesCharactersToSet: any = [];
 export const favoritesEpisodesToSet: any = [];
 export const favoritesLocationsToSet: any = [];
+
+import { Container, Content, HeroContent } from "./styles";
 
 const Favorites = () => {
   const router = useRouter();
@@ -105,7 +107,7 @@ const Favorites = () => {
                 title="Personagens"
               />
               <DefaultButton
-                icon={<XCircle size={24} color={`var(--FONT-COLOR)`} />}
+                icon={darkTheme ? Icons.WhiteXCircle : Icons.DarkXCircle}
                 text="Deletar personagens"
                 onClick={() => handleDeleteFavoriteCharacters()}
                 color={`var(--RED)`}
@@ -139,12 +141,12 @@ const Favorites = () => {
           <>
             <div className="section-and-delete">
               <TitleSection
-                onClick={() => router.push("/character/1")}
-                id="characters"
-                title="Personagens"
+                onClick={() => router.push("/episode/1")}
+                id="episodes"
+                title="Episódios"
               />
               <DefaultButton
-                icon={<XCircle size={24} color={`var(--FONT-COLOR)`} />}
+                icon={darkTheme ? Icons.WhiteXCircle : Icons.DarkXCircle}
                 text="Deletar episódios"
                 onClick={() => handleDeleteFavoriteEpisodes()}
                 color={`var(--RED)`}
@@ -163,19 +165,24 @@ const Favorites = () => {
             </div>
           </>
         ) : (
-          <TitleSection id="episodes" title="Episódios" isSearching />
+          <TitleSection
+            id="episodes"
+            title="Episódios"
+            isSearching
+            onClick={() => router.push("/episode/1")}
+          />
         )}
 
         {storedLocations?.length > 0 ? (
           <>
             <div className="section-and-delete">
               <TitleSection
-                onClick={() => router.push("/character/1")}
+                onClick={() => router.push("/location/1")}
                 id="characters"
                 title="Personagens"
               />
               <DefaultButton
-                icon={<XCircle size={24} color={`var(--FONT-COLOR)`} />}
+                icon={darkTheme ? Icons.WhiteXCircle : Icons.DarkXCircle}
                 text="Deletar localizações"
                 onClick={() => handleDeleteFavoriteLocations()}
                 color={`var(--RED)`}
@@ -194,7 +201,12 @@ const Favorites = () => {
             </div>
           </>
         ) : (
-          <TitleSection id="locations" title="Localizações" isSearching />
+          <TitleSection
+            id="locations"
+            title="Localizações"
+            onClick={() => router.push("/location/1")}
+            isSearching
+          />
         )}
       </Content>
     </Container>

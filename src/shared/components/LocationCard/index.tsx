@@ -1,16 +1,19 @@
 import { useRouter } from "next/router";
+import { useContext, useEffect, useState } from "react";
+import Image from "next/image";
 
-import { Planet, Info, Heart, MapPin } from "@phosphor-icons/react";
+import { Icons } from "./icons";
 
 import { LocationCardProps } from "@/shared/types/locationCardProps";
 import DefaultButton from "../DefaultButton";
 import { favoritesLocationsToSet } from "@/pages/favorites/index.page";
 
 import { Container, Content } from "./styles";
-import { useEffect, useState } from "react";
+import { GlobalContext } from "@/pages/_app.page";
 
 const LocationCard = ({ id, type, name }: LocationCardProps) => {
   const router = useRouter();
+  const { darkTheme } = useContext(GlobalContext);
 
   const isCharacterScreen = router.pathname.slice(0, 10) === "/character";
 
@@ -69,26 +72,37 @@ const LocationCard = ({ id, type, name }: LocationCardProps) => {
       {name && (
         <>
           {type === "Planet" ? (
-            <Planet size={48} color={`var(--FONT-COLOR)`} />
+            <Image
+              src={darkTheme ? Icons.WhitePlanet : Icons.DarkPlanet}
+              width={48}
+              height={48}
+              alt=""
+            />
           ) : (
-            <MapPin size={48} color={`var(--FONT-COLOR)`} />
+            <Image
+              src={darkTheme ? Icons.WhiteMapPin : Icons.DarkMapPin}
+              width={48}
+              height={48}
+              alt=""
+            />
           )}
           <Content>
             <h4>{type === "unknown" ? "Desconhecido" : type}</h4>
             <h4>{name}</h4>
             <DefaultButton
-              icon={<Info size={24} color={`var(--FONT-COLOR)`} />}
+              icon={darkTheme ? Icons.WhiteInfo : Icons.DarkInfo}
               text="Saiba mais"
               onClick={() => router.push(`/location/${id}`)}
             />
             {!isCharacterScreen && (
               <>
                 {!isFavorited ? (
-                  <button>
-                    <Heart
-                      size={32}
-                      color={`var(--FONT-COLOR)`}
-                      onClick={() => handleFavorite()}
+                  <button onClick={() => handleFavorite()}>
+                    <Image
+                      src={Icons.BlueHeartOutline}
+                      width={32}
+                      height={32}
+                      alt=""
                     />
                   </button>
                 ) : (
@@ -101,7 +115,12 @@ const LocationCard = ({ id, type, name }: LocationCardProps) => {
                       marginTop: "8px",
                     }}
                   >
-                    <Heart color={`var(--BLUE-A)`} size={16} weight="fill" />{" "}
+                    <Image
+                      src={Icons.BlueHeart}
+                      width={16}
+                      height={16}
+                      alt=""
+                    />
                     Item
                     <br /> favoritado
                   </h4>

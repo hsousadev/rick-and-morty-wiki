@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import Image from "next/image";
 
-import { Heart } from "@phosphor-icons/react";
+import BlueHeartOutline from '@/shared/assets/icons/BlueHeartOutline.svg';
 
 import HighlightImage from "@/shared/assets/images/rick-and-morty-fav.png";
 import { GlobalContext } from "@/pages/_app.page";
@@ -14,7 +14,7 @@ const Hero = () => {
   return (
     <Container isDarkMode={darkTheme}>
       <div className="page-title">
-        <Heart size={56} color={`var(--BLUE-A)`} />
+        <Image src={BlueHeartOutline} width={56} height={56} alt="" />
         <h1>
           Todos os seus <br /> <strong>favoritos</strong>
         </h1>

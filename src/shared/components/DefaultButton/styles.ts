@@ -22,6 +22,12 @@ export const Container = styled.button<ContainerProps>`
     white-space: nowrap;
   }
 
+  img {
+    transition: all 0.4s ease-in-out;
+    width: 24px;
+    height: 24px;
+  }
+
   svg {
     transition: all 0.4s ease-in-out;
   }
@@ -42,19 +48,12 @@ export const Container = styled.button<ContainerProps>`
       transition: all 0.4s ease-in-out;
       fill: white;
     }
-
-    p {
-      color: #fff;
-    }
   }
 
   ${(props) =>
     props.isSelected
       ? css`
           background-color: var(--BLUE-A);
-          p {
-            color: #fff;
-          }
         `
       : css`
           background-color: var(--BTN-BACKGROUND);

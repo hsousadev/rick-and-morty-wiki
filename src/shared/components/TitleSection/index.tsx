@@ -1,7 +1,9 @@
+import { useContext } from "react";
+
+import { Icons } from "./icons";
 import DefaultButton from "../DefaultButton";
 
-import { SquaresFour } from "@phosphor-icons/react";
-
+import { GlobalContext } from "@/pages/_app.page";
 import { Container } from "./styles";
 
 interface TitleSectionProps {
@@ -19,11 +21,13 @@ const TitleSection = ({
   isSearching,
   resultsCount,
 }: TitleSectionProps) => {
+  const { darkTheme } = useContext(GlobalContext);
+
   return (
     <Container id={id}>
       <h3>{title}</h3>
       <DefaultButton
-        icon={<SquaresFour size={24} color={`var(--FONT-COLOR)`} />}
+        icon={darkTheme ? Icons.WhiteSquaresFour : Icons.DarkSquaresFour}
         text="Ver todos"
         onClick={onClick}
       />

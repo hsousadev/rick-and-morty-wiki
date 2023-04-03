@@ -1,14 +1,13 @@
 import { useRouter } from "next/router";
 import { useContext } from "react";
+import Image from "next/image";
 
 import useWindowSize from "@/shared/utils/useWindowSize";
-
-import Image from "next/image";
 
 import Logo from "@/shared/assets/icons/rick-and-morty-no-border-logo.svg";
 import DefaultButton from "../DefaultButton";
 
-import { Heart, HouseSimple, Moon, Sun } from "@phosphor-icons/react";
+import { Icons } from "./icons";
 
 import { Container, Content } from "./styles";
 import { GlobalContext } from "@/pages/_app.page";
@@ -39,7 +38,7 @@ const TopBar = () => {
         <div className="buttons">
           {!isFavorites && (
             <DefaultButton
-              icon={<Heart size={24} color={`var(--FONT-COLOR)`} />}
+              icon={darkTheme ? Icons.WhiteHeart : Icons.DarkHeart}
               text={
                 isMobile ? (isHome ? "Meus favoritos" : "") : "Meus favoritos"
               }
@@ -49,30 +48,30 @@ const TopBar = () => {
           {!isHome && (
             <>
               <DefaultButton
-                icon={<HouseSimple size={24} color={`var(--FONT-COLOR)`} />}
+                icon={darkTheme ? Icons.WhiteHouseSimple : Icons.DarkHouseSimple}
                 text={isMobile ? "" : "Início"}
                 onClick={() => router.push("/")}
               />
               {darkTheme ? (
                 <>
                   <DefaultButton
-                    icon={<Moon color="#fff" size={24} />}
+                    icon={darkTheme ? Icons.WhiteMoon : Icons.DarkMoon}
                     onClick={() => handleActiveDarkTheme()}
                     selected
                   />
                   <DefaultButton
-                    icon={<Sun color="#fff" size={24} />}
+                    icon={darkTheme ? Icons.WhiteSun : Icons.DarkSun}
                     onClick={() => handleDisableDarkTheme()}
                   />
                 </>
               ) : (
                 <>
                   <DefaultButton
-                    icon={<Moon color="#313234" size={24} />}
+                    icon={darkTheme ? Icons.WhiteMoon : Icons.DarkMoon}
                     onClick={() => handleActiveDarkTheme()}
                   />
                   <DefaultButton
-                    icon={<Sun color="#fff" size={24} />}
+                    icon={darkTheme ? Icons.WhiteSun : Icons.DarkSun}
                     onClick={() => handleDisableDarkTheme()}
                     selected
                   />

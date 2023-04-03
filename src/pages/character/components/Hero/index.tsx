@@ -1,21 +1,14 @@
 import Image from "next/image";
-
-import {
-  MonitorPlay,
-  Heart,
-  Pulse,
-  Alien,
-  GenderIntersex,
-  Skull,
-} from "@phosphor-icons/react";
+import { useContext, useEffect, useState } from "react";
 
 import CharacterProps from "../../interfaces";
+import { Icons } from "./icons";
 
 import LocationCard from "@/shared/components/LocationCard";
 import { LocationCardProps } from "@/shared/types/locationCardProps";
 
 import { Container } from "./styles";
-import { useEffect, useState } from "react";
+import { GlobalContext } from "@/pages/_app.page";
 
 const HomeHero = ({
   name,
@@ -27,6 +20,8 @@ const HomeHero = ({
   image,
   episode,
 }: CharacterProps) => {
+  const { darkTheme } = useContext(GlobalContext);
+
   const [originCardInfo, setOriginCardInfo] = useState<LocationCardProps>();
   const [locationCardInfo, setLocationCardInfo] = useState<LocationCardProps>();
 
@@ -57,7 +52,12 @@ const HomeHero = ({
         <div>
           <h1>{name}</h1>
           <h3>
-            <MonitorPlay size={32} />
+            <Image
+              src={darkTheme ? Icons.WhiteMonitorPlay : Icons.DarkMonitorPlay}
+              width={32}
+              height={32}
+              alt=""
+            />
             Participou de{" "}
             {episode?.length > 1
               ? episode?.length + " episódios"
@@ -67,19 +67,24 @@ const HomeHero = ({
             <h3>
               {status === "Alive" ? (
                 <>
-                  <Pulse size={32} color={`var(--PEAR)`} />
+                  <Image src={Icons.Pulse} width={32} height={32} alt="" />
 
                   {gender === "Male" ? "Vivo" : "Viva"}
                 </>
               ) : (
                 <>
-                  <Skull size={32} color={`var(--RED)`} />
+                  <Image src={Icons.Skull} width={32} height={32} alt="" />
                   {gender === "Male" ? "Morto" : "Morta"}
                 </>
               )}
             </h3>
             <h3>
-              <Alien size={32} />
+              <Image
+                src={darkTheme ? Icons.WhiteAlien : Icons.DarkAlien}
+                width={32}
+                height={32}
+                alt=""
+              />
               {species === "unknown"
                 ? "Espécie desconhecida"
                 : species === "Human"
@@ -89,7 +94,12 @@ const HomeHero = ({
                 : species}
             </h3>
             <h3>
-              <GenderIntersex size={32} />
+              <Image
+                src={darkTheme ? Icons.WhiteGenderIntersex : Icons.DarkGenderIntersex}
+                width={32}
+                height={32}
+                alt=""
+              />
               {gender === "unknown"
                 ? "Espécie desconhecida"
                 : gender === "Male"

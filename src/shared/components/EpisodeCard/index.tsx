@@ -1,12 +1,13 @@
+import Image from "next/image";
 import { useRouter } from "next/router";
-
-import { MonitorPlay, Info, Heart } from "@phosphor-icons/react";
 
 import DefaultButton from "../DefaultButton";
 import { favoritesEpisodesToSet } from "@/pages/favorites/index.page";
 
 import { Container } from "./styles";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { GlobalContext } from "@/pages/_app.page";
+import { Icons } from "./icons";
 
 export interface EpisodeCardProps {
   id?: number;
@@ -16,6 +17,7 @@ export interface EpisodeCardProps {
 
 const EpisodeCard = ({ id, name, episode }: EpisodeCardProps) => {
   const router = useRouter();
+  const { darkTheme } = useContext(GlobalContext);
 
   const [isFavorited, setIsFavorited] = useState(false);
 
@@ -70,30 +72,31 @@ const EpisodeCard = ({ id, name, episode }: EpisodeCardProps) => {
   return (
     <Container>
       <div>
-        <MonitorPlay size={24} color={`var(--FONT-COLOR)`} />
+        <Image
+          width={24}
+          height={24}
+          src={darkTheme ? Icons.WhiteMonitorPlay : Icons.DarkMonitorPlay}
+          alt=""
+        />
         <h4>
           {name} {episode}
         </h4>
       </div>
       <div>
         <DefaultButton
-          icon={<Info size={24} color={`var(--FONT-COLOR)`} />}
+          icon={darkTheme ? Icons.WhiteInfo : Icons.DarkInfo}
           text="Saiba mais"
           onClick={() => router.push(`/episode/${id}`)}
         />
 
         {!isFavorited ? (
           <button>
-            <Heart
-              size={32}
-              color={`var(--FONT-COLOR)`}
-              onClick={() => handleFavorite()}
-            />
+            <Image width={32} height={32} src={Icons.BlueHeartOutline} alt="" onClick={() => handleFavorite()} />
           </button>
         ) : (
           <h4 style={{ textAlign: "end", color: `var(--BLUE-A)` }}>
-            <Heart color={`var(--BLUE-A)`} size={16} weight="fill" /> Item{" "}
-            <br /> favoritado{" "}
+            <Image width={16} height={16} src={Icons.BlueHeart} alt="" />
+            Item <br /> favoritado{" "}
           </h4>
         )}
       </div>

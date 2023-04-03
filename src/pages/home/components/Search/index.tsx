@@ -1,12 +1,15 @@
+import Image from 'next/image'
 import React, { useContext, SetStateAction, Dispatch } from "react";
 
-import { MagnifyingGlass } from "@phosphor-icons/react";
 import { GlobalContext } from "@/pages/_app.page";
 
-import { Container } from "./styles";
+import { Icons } from "./icons";
+
 import CharacterListProps from "@/pages/character/interfaces";
 import { EpisodeListProps } from "@/pages/episode/interfaces";
 import { LocationListProps } from "@/pages/location/interfaces";
+
+import { Container } from "./styles";
 
 interface SearchProps {
   setCharacterListInitial: Dispatch<SetStateAction<CharacterListProps>>;
@@ -71,7 +74,7 @@ const Search = ({
           maxLength={30}
         />
         <button id="doSearch" onClick={(e) => handleSearch(e)}>
-          <MagnifyingGlass color={`var(--FONT-COLOR)`} size={32} />
+          <Image src={darkTheme ? Icons.WhiteMagnifyingGlass : Icons.DarkMagnifyingGlass} alt ="" /> 
         </button>
       </Container>
     </>

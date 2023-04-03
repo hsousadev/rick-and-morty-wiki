@@ -1,21 +1,15 @@
-import { useRouter } from "next/router";
+import Image from "next/image";
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import DefaultButton from "../DefaultButton";
 import { favoritesCharactersToSet } from "@/pages/favorites/index.page";
 
-import {
-  Pulse,
-  Alien,
-  Planet,
-  Heart,
-  Info,
-  Skull,
-} from "@phosphor-icons/react";
+import { Icons } from "./icons";
 
 import { Container } from "./styles";
 import Link from "next/link";
+import { GlobalContext } from "@/pages/_app.page";
 
 export interface CharacterCardProps {
   id: number;
@@ -36,8 +30,8 @@ const CharacterCard = ({
   species,
   origin,
 }: CharacterCardProps) => {
-  const router = useRouter();
   const isAlive = status === "Alive";
+  const { darkTheme } = useContext(GlobalContext);
 
   const [isFavorited, setIsFavorited] = useState(false);
 
@@ -102,18 +96,23 @@ const CharacterCard = ({
           <div>
             {isAlive ? (
               <>
-                <Pulse color={`var(--PEAR)`} />
+                <Image width={16} height={16} src={Icons.Pulse} alt="" />
                 <p>Vivo(a)</p>
               </>
             ) : (
               <>
-                <Skull color={`var(--RED)`} />
+                <Image width={16} height={16} src={Icons.Skull} alt="" />
                 <p>Morto(a)</p>
               </>
             )}
           </div>
           <div>
-            <Alien color={`var(--FONT-COLOR)`} />
+            <Image
+              width={16}
+              height={16}
+              src={darkTheme ? Icons.WhiteAlien : Icons.DarkAlien}
+              alt=""
+            />
             <p>
               {species === "unknown"
                 ? "Espécie desconhecida"
@@ -123,28 +122,35 @@ const CharacterCard = ({
             </p>
           </div>
           <div>
-            <Planet color={`var(--FONT-COLOR)`} />
+            <Image
+              width={16}
+              height={16}
+              src={darkTheme ? Icons.WhitePlanet : Icons.DarkPlanet}
+              alt=""
+            />
             <p>{origin === "unknown" ? "Desconhecido" : origin}</p>
           </div>
         </div>
         {!isFavorited ? (
           <button>
-            <Heart
-              color={`var(--BLUE-A)`}
-              size={48}
+            <Image
+              width={48}
+              height={48}
+              src={Icons.BlueHeartOutline}
+              alt=""
               onClick={() => handleFavorite()}
             />
           </button>
         ) : (
           <h4 style={{ textAlign: "end", color: `var(--BLUE-A)` }}>
-            <Heart color={`var(--BLUE-A)`} size={16} weight="fill" /> Item{" "}
-            <br /> favoritado{" "}
+            <Image width={16} height={16} src={Icons.BlueHeart} alt="" />{" "}
+            Item <br /> favoritado{" "}
           </h4>
         )}
       </div>
       <Link href={`/character/${id}`}>
         <DefaultButton
-          icon={<Info size={24} color={`var(--FONT-COLOR)`} />}
+          icon={darkTheme ? Icons.WhiteInfo : Icons.DarkInfo}
           text="Saiba Mais"
         />
       </Link>

@@ -1,10 +1,10 @@
 import smoothScroll from "@/shared/utils/smoothScroll";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import Hero from "@/shared/components/Hero";
 
-import { MonitorPlay } from "@phosphor-icons/react";
+import { Icons } from "./icons";
 
 import { EpisodeProps, EpisodeListProps } from "./interfaces";
 
@@ -12,6 +12,7 @@ import { Container, Content, HeroContent } from "./styles";
 import MoreSection from "@/shared/components/MoreSection";
 import EpisodeCard from "@/shared/components/EpisodeCard";
 import Paginate from "@/shared/components/Paginate";
+import { GlobalContext } from "../_app.page";
 
 export async function getStaticPaths() {
   return {
@@ -37,6 +38,7 @@ export async function getStaticProps() {
 const Episode = ({ results, info }: EpisodeListProps) => {
   const router = useRouter();
   const { episode_slug } = router.query;
+  const { darkTheme } = useContext(GlobalContext);
 
   const [episode, setEpisode] = useState<EpisodeProps>();
   const [espisodeListData, setEspisodeListData] = useState(results);
@@ -81,7 +83,7 @@ const Episode = ({ results, info }: EpisodeListProps) => {
       )}
       <Content>
         <MoreSection
-          icon={<MonitorPlay size={48} color={`var(--FONT-COLOR)`} />}
+          icon={darkTheme ? Icons.WhiteMonitorPlay : Icons.DarkMonitorPlay}
           text="episódios"
         />
 

@@ -1,13 +1,17 @@
 import Image from "next/image";
 
-import { ArrowUp, CodeSimple } from "@phosphor-icons/react";
-
 import logo from "@/shared/assets/icons/rick-and-morty-no-border-logo.svg";
 import smoothScroll from "@/shared/utils/smoothScroll";
 
+import { Icons } from "./icons";
+
 import { Container, Content } from "./styles";
+import { useContext } from "react";
+import { GlobalContext } from "@/pages/_app.page";
 
 const Footer = () => {
+  const { darkTheme } = useContext(GlobalContext);
+
   return (
     <Container>
       <Content>
@@ -17,14 +21,21 @@ const Footer = () => {
           <div className="return-top">
             <button onClick={() => smoothScroll("top")}>
               <h4>Voltar ao topo</h4>
-              <ArrowUp weight="thin" size={24} color={`var(--FONT-COLOR)`} />
+              <Image
+                alt=""
+                width={40}
+                height={40}
+                src={
+                  darkTheme ? Icons.WhiteCircleArrowUp : Icons.DarkCircleArrowUp
+                }
+              />
             </button>
           </div>
         </div>
         <div className="copyrights">
           <h4>Copyright © 2023 </h4>
           <h4>
-            <CodeSimple weight="bold" size={24} color={`var(--BLUE-A)`} />
+            <Image alt="" width={24} height={24} src={Icons.CodeSimple} />
             Desenvolvido por{" "}
             <strong>
               <a

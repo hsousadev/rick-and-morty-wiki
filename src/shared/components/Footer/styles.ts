@@ -30,7 +30,7 @@ export const Content = styled.div`
         gap: 8px;
 
         :hover {
-          svg {
+          img {
             transition: all 0.4s ease-in-out;
             transform: rotate(360deg);
           }

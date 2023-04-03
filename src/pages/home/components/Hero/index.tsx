@@ -4,7 +4,8 @@ import Image from "next/image";
 import DarkThemeHeroImage from "@/shared/assets/images/hero-image-dark.png";
 import WhiteThemeHeroImage from "@/shared/assets/images/hero-image-white.png";
 
-import { Moon, Sun } from "@phosphor-icons/react";
+import { Icons } from "./icons";
+
 import { GlobalContext } from "@/pages/_app.page";
 
 import DefaultButton from "@/shared/components/DefaultButton";
@@ -30,35 +31,18 @@ const Hero = () => {
         </h1>
         <h4>Personagens. localizações, episódios e muito mais.</h4>
         <div className="buttons">
-          {darkTheme ? (
-            <>
-              <DefaultButton
-                icon={<Moon color="#fff" size={24} />}
-                text="Escuro"
-                onClick={() => handleActiveDarkTheme()}
-                selected
-              />
-              <DefaultButton
-                icon={<Sun color="#fff" size={24} />}
-                text="Claro"
-                onClick={() => handleDisableDarkTheme()}
-              />
-            </>
-          ) : (
-            <>
-              <DefaultButton
-                icon={<Moon color="#313234" size={24} />}
-                text="Escuro"
-                onClick={() => handleActiveDarkTheme()}
-              />
-              <DefaultButton
-                icon={<Sun color="#fff" size={24} />}
-                text="Claro"
-                onClick={() => handleDisableDarkTheme()}
-                selected
-              />
-            </>
-          )}
+          <DefaultButton
+            icon={darkTheme ? Icons.WhiteMoon : Icons.DarkMoon}
+            text="Escuro"
+            onClick={() => handleActiveDarkTheme()}
+            selected={darkTheme}
+          />
+          <DefaultButton
+            icon={darkTheme ? Icons.WhiteSun : Icons.DarkSun}
+            text="Claro"
+            onClick={() => handleDisableDarkTheme()}
+            selected={!darkTheme}
+          />
         </div>
         {darkTheme ? (
           <h4 className="theme-phrase">Ai sim, Porr#@%&*</h4>
