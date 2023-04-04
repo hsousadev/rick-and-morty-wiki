@@ -29,7 +29,7 @@ const Hero = () => {
         <h1>
           Saiba tudo em <br /> um só <strong>lugar.</strong>
         </h1>
-        <h4>Personagens. localizações, episódios e muito mais.</h4>
+        <h4>Personagens, localizações, episódios e muito mais.</h4>
         <div className="buttons">
           <DefaultButton
             icon={darkTheme ? Icons.WhiteMoon : Icons.DarkMoon}
