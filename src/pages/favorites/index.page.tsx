@@ -178,8 +178,8 @@ const Favorites = () => {
             <div className="section-and-delete">
               <TitleSection
                 onClick={() => router.push("/location/1")}
-                id="characters"
-                title="Personagens"
+                id="locations"
+                title="Localizações"
               />
               <DefaultButton
                 icon={darkTheme ? Icons.WhiteXCircle : Icons.DarkXCircle}
