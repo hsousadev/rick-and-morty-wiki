@@ -6,7 +6,7 @@ export const Container = styled.div`
   justify-content: center;
   flex-direction: column;
 
-  > svg {
+  > img {
     margin-bottom: -12%;
     z-index: 2;
   }
