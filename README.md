@@ -1,7 +1,6 @@
 # Rick and Morty Wiki
+![rick-and-morty-github-cover](https://github.com/justhenrique/rick-and-morty-wiki/assets/54003876/f8096477-5c6c-4ba1-a90f-684e96b1655b)
 
-
-![rick-and-morty](https://user-images.githubusercontent.com/54003876/229385071-92694ca7-ca83-4c9a-b316-ef3a6b27640a.png)
 
 ## 🌐 Site Online: 
 https://rickandmortysite.vercel.app/
