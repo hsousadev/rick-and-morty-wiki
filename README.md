@@ -1,5 +1,6 @@
 # Rick and Morty Wiki
-![rick-and-morty-github-cover](https://github.com/justhenrique/rick-and-morty-wiki/assets/54003876/6981008c-0103-4e96-9f81-d02ca218ddb1)
+<img width="1280" height="640" alt="github-banner" src="https://github.com/user-attachments/assets/e2d46fed-9a4e-41e6-bccd-374ef4d710f3" />
+
 
 
 ## 🌐 Site Online: 
@@ -7,8 +8,7 @@ https://rickandmortysite.vercel.app/
 
 ## 🎨 Figma: 
 
-Link do protótipo: https://www.figma.com/file/OGfZiChmbX5CGc0Ls7MCuW/Rick-and-Morty?node-id=135%3A10918&t=gLM3f0fuYEfF7omd-1
-
+Link do protótipo: https://www.figma.com/design/LgK3Tkj1eI8tq5FDflWGge/Rick-Morty-Wiki?node-id=0-1&t=HsS0jkGGodeYpB2Q-1
 
 
 ## 🚀 Build
