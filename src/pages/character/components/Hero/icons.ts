@@ -8,6 +8,8 @@ import DarkGenderIntersex from "@/shared/assets/icons/DarkGenderIntersex.svg";
 import WhiteGenderIntersex from "@/shared/assets/icons/WhiteGenderIntersex.svg";
 import Skull from "@/shared/assets/icons/Skull.svg";
 import Pulse from "@/shared/assets/icons/Pulse.svg";
+import DarkQuestion from "@/shared/assets/icons/DarkQuestion.svg";
+import WhiteQuestion from "@/shared/assets/icons/WhiteQuestion.svg";
 
 export const Icons = {
   DarkMonitorPlay,
@@ -20,4 +22,6 @@ export const Icons = {
   DarkGenderIntersex,
   WhiteGenderIntersex,
   Skull,
+  DarkQuestion,
+  WhiteQuestion,
 };

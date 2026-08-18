@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 
-interface IUseWindowSizeReturnedValues {
+type WindowSize = {
   windowWidth: number;
   windowHeight: number;
-}
+};
 
-const useWindowSize = (): IUseWindowSizeReturnedValues => {
-  const [windowSize, setWindowSize] = useState<any>({
-    windowWidth: undefined,
-    windowHeight: undefined,
+const useWindowSize = (): WindowSize => {
+  const [windowSize, setWindowSize] = useState<WindowSize>({
+    windowWidth: 1200,
+    windowHeight: 800,
   });
 
   useEffect(() => {
@@ -20,9 +20,7 @@ const useWindowSize = (): IUseWindowSizeReturnedValues => {
     }
 
     window.addEventListener("resize", handleResize);
-
     handleResize();
-
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 

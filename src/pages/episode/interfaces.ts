@@ -1,15 +1,4 @@
-export interface EpisodeProps {
-  id: number;
-  name: string;
-  air_date: string;
-  episode: string;
-  characters: Array<string>;
-}
+import type { Episode, Paged } from "@/shared/types/api";
 
-export interface EpisodeListProps {
-  info: {
-    pages: number;
-    count: number;
-  };
-  results: Array<EpisodeProps>;
-}
+export type EpisodeProps = Episode;
+export type EpisodeListProps = Paged<Episode>;

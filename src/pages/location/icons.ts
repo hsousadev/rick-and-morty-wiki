@@ -1,7 +1,11 @@
-import DarkMonitorPlay from "@/shared/assets/icons/DarkMonitorPlay.svg";
-import WhiteMonitorPlay from "@/shared/assets/icons/WhiteMonitorPlay.svg";
+import DarkPlanet from "@/shared/assets/icons/DarkPlanet.svg";
+import WhitePlanet from "@/shared/assets/icons/WhitePlanet.svg";
+import DarkSmileyBlank from "@/shared/assets/icons/DarkSmileyBlank.svg";
+import WhiteSmileyBlank from "@/shared/assets/icons/WhiteSmileyBlank.svg";
 
 export const Icons = {
-  DarkMonitorPlay,
-  WhiteMonitorPlay
-}
+  DarkPlanet,
+  WhitePlanet,
+  DarkSmileyBlank,
+  WhiteSmileyBlank,
+};

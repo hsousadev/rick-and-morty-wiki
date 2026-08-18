@@ -1,40 +1,34 @@
 import styled, { css } from "styled-components";
-
-interface HeroContentProps {
-  isDarkTheme: boolean;
-}
+import { carouselOnMobile } from "@/shared/styles/mixins";
 
 export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-
   width: 100%;
 `;
 
-export const HeroContent = styled.div<HeroContentProps>`
+export const HeroContent = styled.div<{ $isDarkTheme: boolean }>`
   width: 100%;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
-  width: 100vw;
+  padding: 0 24px 32px;
+  background: var(--HERO-BAND);
+  border-bottom: 3px solid var(--INK);
 
   ${(props) =>
-    props.isDarkTheme
-      ? css`
-          background-color: #000000;
-        `
-      : css`
-          background-color: transparent;
-          border-bottom: 1px solid var(--BLUE-A);
-        `}
-
-  @media(max-width: var(--MAX-CONTENT-WIDTH)) {
-    height: 100%;
-  }
+    !props.$isDarkTheme &&
+    css`
+      background-image: repeating-linear-gradient(
+        -12deg,
+        transparent,
+        transparent 12px,
+        color-mix(in srgb, var(--INK) 6%, transparent) 12px,
+        color-mix(in srgb, var(--INK) 6%, transparent) 13px
+      );
+    `}
 `;
 
 export const Content = styled.div`
@@ -42,8 +36,7 @@ export const Content = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-
-  padding: 64px 0 80px 0;
+  padding: 48px 24px 80px;
   max-width: var(--MAX-CONTENT-WIDTH);
   width: 100%;
 
@@ -51,54 +44,36 @@ export const Content = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     width: 100%;
+    gap: 16px;
+    flex-wrap: wrap;
   }
 
   .characters,
   .episodes,
   .locations {
     display: grid;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: column;
-
     width: 100%;
     margin-top: 24px;
-
-    gap: 16px;
+    gap: 24px;
   }
 
   .characters {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    ${carouselOnMobile("min(78vw, 280px)")}
   }
+
   .episodes {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    ${carouselOnMobile("min(72vw, 240px)")}
   }
+
   .locations {
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    ${carouselOnMobile("min(48vw, 180px)")}
   }
 
-  @media (max-width: 1360px) {
-    padding: 64px;
-
-    .search-and-filter {
-      flex-direction: column;
-      gap: 24px;
-    }
-
-    .characters,
-    .episodes,
-    .locations {
-      display: flex;
-      justify-content: center;
-      flex-direction: row;
-
-      flex-wrap: wrap;
-    }
-  }
-
-  @media (max-width: 460px) {
-    padding: 24px;
+  .section-block {
+    width: 100%;
   }
 `;

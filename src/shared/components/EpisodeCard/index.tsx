@@ -1,13 +1,13 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
-
+import styled from "styled-components";
 import DefaultButton from "../DefaultButton";
-import { favoritesEpisodesToSet } from "@/pages/favorites/index.page";
-
-import { Container } from "./styles";
-import { useContext, useEffect, useState } from "react";
-import { GlobalContext } from "@/pages/_app.page";
 import { Icons } from "./icons";
+import { useTheme } from "@/shared/context/ThemeContext";
+import { useFavorites } from "@/shared/context/FavoritesContext";
+import { useI18n } from "@/i18n/LocaleContext";
+import { sticker } from "@/shared/styles/mixins";
+import { usePrefetch } from "@/shared/utils/usePrefetch";
 
 export interface EpisodeCardProps {
   id?: number;
@@ -15,93 +15,82 @@ export interface EpisodeCardProps {
   episode: string;
 }
 
-const EpisodeCard = ({ id, name, episode }: EpisodeCardProps) => {
+const Container = styled.article`
+  ${sticker}
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px;
+  width: 100%;
+  min-height: 160px;
+  gap: 16px;
+
+  .title {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+
+    h4 {
+      font-family: var(--FONT-DISPLAY);
+      line-height: 1.2;
+    }
+  }
+
+  .code {
+    color: var(--PORTAL-CYAN);
+    font-size: 13px;
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+`;
+
+export default function EpisodeCard({ id, name, episode }: EpisodeCardProps) {
   const router = useRouter();
-  const { darkTheme } = useContext(GlobalContext);
-
-  const [isFavorited, setIsFavorited] = useState(false);
-
-  const episodeCard = {
-    id: id,
-    name: name,
-    episode: episode,
-  };
-
-  function handleFavorite() {
-    setIsFavorited(true);
-
-    const storageFavoritesEpisodes: any =
-      localStorage.getItem("favoriteEpisodes");
-
-    const storedFavoriteEpisodes = JSON.parse(storageFavoritesEpisodes);
-
-    if (storedFavoriteEpisodes) {
-      storedFavoriteEpisodes.push(episodeCard);
-
-      localStorage.setItem(
-        "favoriteEpisodes",
-        JSON.stringify(storedFavoriteEpisodes)
-      );
-    } else {
-      favoritesEpisodesToSet.push(episodeCard);
-
-      localStorage.setItem(
-        "favoriteEpisodes",
-        JSON.stringify(favoritesEpisodesToSet)
-      );
-    }
-  }
-
-  function handleFavoriteEpisodesExists(card: any, list: any) {
-    var i;
-    for (i = 0; i < list?.length; i++) {
-      if (list[i]?.id === card.id) {
-        setIsFavorited(true);
-      }
-    }
-  }
-
-  useEffect(() => {
-    const storageFavoritesEpisodes: any =
-      localStorage.getItem("favoriteEpisodes");
-    const storedFavoriteEpisodes = JSON.parse(storageFavoritesEpisodes);
-
-    handleFavoriteEpisodesExists(episodeCard, storedFavoriteEpisodes);
-  }, []);
+  const { darkTheme } = useTheme();
+  const { t } = useI18n();
+  const { isEpisodeFavorited, toggleEpisode } = useFavorites();
+  const favorited = isEpisodeFavorited(id);
+  const href = id ? `/episode/${id}` : undefined;
+  const prefetch = usePrefetch(href);
 
   return (
-    <Container>
-      <div>
+    <Container {...prefetch}>
+      <div className="title">
         <Image
           width={24}
           height={24}
           src={darkTheme ? Icons.WhiteMonitorPlay : Icons.DarkMonitorPlay}
           alt=""
         />
-        <h4>
-          {name} {episode}
-        </h4>
+        <div>
+          <h4>{name}</h4>
+          <p className="code">{episode}</p>
+        </div>
       </div>
-      <div>
+      <div className="actions">
         <DefaultButton
           icon={darkTheme ? Icons.WhiteInfo : Icons.DarkInfo}
-          text="Saiba mais"
-          onClick={() => router.push(`/episode/${id}`)}
+          text={t.card.more}
+          onClick={() => href && router.push(href)}
         />
-
-        {!isFavorited ? (
-          <button>
-            <Image width={32} height={32} src={Icons.BlueHeartOutline} alt="" onClick={() => handleFavorite()} />
-          </button>
-        ) : (
-          <h4 style={{ textAlign: "end", color: `var(--BLUE-A)` }}>
-            <Image width={16} height={16} src={Icons.BlueHeart} alt="" />
-            Item <br /> favoritado{" "}
-          </h4>
-        )}
+        <button
+          type="button"
+          aria-label={favorited ? t.card.unfavorite : t.card.favorite}
+          onClick={() => toggleEpisode({ id, name, episode })}
+        >
+          <Image
+            width={32}
+            height={32}
+            src={favorited ? Icons.BlueHeart : Icons.BlueHeartOutline}
+            alt=""
+          />
+        </button>
       </div>
     </Container>
   );
-};
-
-export default EpisodeCard;
+}

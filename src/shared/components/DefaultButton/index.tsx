@@ -1,37 +1,65 @@
-import Image from "next/image"
-import { useContext, HTMLAttributes } from "react";
+import Image from "next/image";
+import type { ButtonHTMLAttributes } from "react";
+import styled, { css } from "styled-components";
+import { stampButton } from "@/shared/styles/mixins";
 
-import { Container } from "./styles";
-import { GlobalContext } from "../../../pages/_app.page";
-
-interface DefaultButtonProps extends HTMLAttributes<HTMLButtonElement> {
+type DefaultButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   icon: string;
   text?: string;
-  onClick?: () => void;
   selected?: boolean;
-  color?: string;
-}
-
-const DefaultButton = ({
-  icon,
-  text,
-  onClick,
-  selected,
-  color,
-}: DefaultButtonProps) => {
-  const { darkTheme } = useContext(GlobalContext);
-
-  return (
-    <Container
-      color={color}
-      isDarkTheme={darkTheme}
-      onClick={onClick}
-      isSelected={selected}
-    >
-      <Image src={icon} alt="" />
-      {text && <p>{text}</p>}
-    </Container>
-  );
+  tone?: "default" | "danger";
 };
 
-export default DefaultButton;
+const Container = styled.button<{ $selected?: boolean; $tone?: "default" | "danger" }>`
+  ${stampButton}
+  background: var(--BTN-BACKGROUND);
+  color: var(--FONT-COLOR);
+
+  p {
+    margin: 0;
+    font-family: var(--FONT-DISPLAY);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  img {
+    width: 22px;
+    height: 22px;
+  }
+
+  ${(props) =>
+    props.$selected &&
+    css`
+      background: var(--PORTAL-CYAN);
+      color: #06101c;
+    `}
+
+  ${(props) =>
+    props.$tone === "danger" &&
+    css`
+      background: var(--DEAD);
+      color: #fff;
+    `}
+
+  &:hover {
+    background: ${(props) =>
+      props.$tone === "danger" ? "var(--DEAD)" : "var(--PORTAL-LIME-FILL)"};
+    color: #06101c;
+  }
+`;
+
+export default function DefaultButton({
+  icon,
+  text,
+  selected,
+  tone = "default",
+  type = "button",
+  ...props
+}: DefaultButtonProps) {
+  return (
+    <Container $selected={selected} $tone={tone} type={type} {...props}>
+      <Image src={icon} alt="" width={22} height={22} />
+      {text ? <p>{text}</p> : null}
+    </Container>
+  );
+}

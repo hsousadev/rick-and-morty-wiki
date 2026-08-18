@@ -1,18 +1,19 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: false,
+  reactStrictMode: true,
   images: {
-    domains: ["rickandmortyapi.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "rickandmortyapi.com",
+        pathname: "/**",
+      },
+    ],
   },
   compiler: {
     styledComponents: true,
   },
   pageExtensions: ["page.tsx", "page.ts", "page.jsx", "page.js"],
-  modularizeImports: {
-    "@phosphor-icons/react": {
-      transform: "@phosphor-icons/react/{{member}}",
-    },
-  },
 };
 
 module.exports = nextConfig;

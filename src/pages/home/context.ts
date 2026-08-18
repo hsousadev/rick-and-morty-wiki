@@ -1,34 +1,16 @@
 import { createContext } from "react";
-import { EpisodeListProps } from "../episode/interfaces";
-import { LocationListProps } from "../location/interfaces";
+import { emptyPage, type Character, type Episode, type Location, type Paged } from "@/shared/types/api";
 
-export interface HomeContextProps {
-  characterList: any;
-  episodeList: EpisodeListProps;
-  locationList: LocationListProps;
-}
-export const HomeContext = createContext<HomeContextProps>({
-  characterList: {
-    info: {
-      pages: 0,
-      count: 0,
-    },
-    results: [],
-  },
-  episodeList: {
-    info: {
-      pages: 0,
-      count: 0,
-    },
-    results: [],
-  },
-  locationList: {
-    info: {
-      pages: 0,
-      count: 0,
-    },
-    results: [],
-  },
+export type HomeContextProps = {
+  characterList: Paged<Character>;
+  episodeList: Paged<Episode>;
+  locationList: Paged<Location>;
+};
+
+const HomeContext = createContext<HomeContextProps>({
+  characterList: emptyPage<Character>(),
+  episodeList: emptyPage<Episode>(),
+  locationList: emptyPage<Location>(),
 });
 
 export default HomeContext;

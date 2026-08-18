@@ -1,44 +1,29 @@
 import type { AppProps } from "next/app";
 import { GlobalStyles } from "@/shared/styles/global";
-
+import { ThemeProvider } from "@/shared/context/ThemeContext";
+import { ToastProvider } from "@/shared/context/ToastContext";
+import { FavoritesProvider } from "@/shared/context/FavoritesContext";
+import { LocaleProvider } from "@/i18n/LocaleContext";
+import SceneBackdrop from "@/shared/components/SceneBackdrop";
 import Footer from "@/shared/components/Footer";
 import TopBar from "@/shared/components/TopBar";
 
-import { createContext, SetStateAction, useEffect, useState } from "react";
-import { CharacterCardProps } from "@/shared/components/CharacterCard";
-
-interface GlobalContextProps {
-  darkTheme: boolean;
-  setDarkTheme: React.Dispatch<React.SetStateAction<boolean>>;
-  favoritesCharacters: any;
-  setFavoritesCharacters: any;
-}
-
-export const GlobalContext = createContext<GlobalContextProps>({
-  darkTheme: true,
-  setDarkTheme: () => {},
-  favoritesCharacters: [],
-  setFavoritesCharacters: () => {},
-});
-
 export default function App({ Component, pageProps }: AppProps) {
-  const [darkTheme, setDarkTheme] = useState(true);
-  const [favoritesCharacters, setFavoritesCharacters] = useState([]);
-
   return (
-    <GlobalContext.Provider
-      value={{
-        darkTheme,
-        setDarkTheme,
-        favoritesCharacters,
-        setFavoritesCharacters,
-      }}
-    >
-      <>
-        <TopBar />
-        <GlobalStyles darkTheme={darkTheme} /> <Component {...pageProps} />
-        <Footer />
-      </>
-    </GlobalContext.Provider>
+    <ThemeProvider>
+      <LocaleProvider>
+        <ToastProvider>
+          <FavoritesProvider>
+            <GlobalStyles />
+            <SceneBackdrop />
+            <div style={{ position: "relative", zIndex: 1 }}>
+              <TopBar />
+              <Component {...pageProps} />
+              <Footer />
+            </div>
+          </FavoritesProvider>
+        </ToastProvider>
+      </LocaleProvider>
+    </ThemeProvider>
   );
 }

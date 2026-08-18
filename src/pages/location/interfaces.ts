@@ -1,15 +1,4 @@
-export interface LocationProps {
-  id: number;
-  name: string;
-  type: string;
-  dimension: string;
-  residents: Array<string>;
-}
+import type { Location, Paged } from "@/shared/types/api";
 
-export interface LocationListProps {
-  info: {
-    pages: number;
-    count: number;
-  };
-  results: Array<LocationProps>;
-}
+export type LocationProps = Location;
+export type LocationListProps = Paged<Location>;
