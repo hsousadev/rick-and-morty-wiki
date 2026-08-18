@@ -172,11 +172,13 @@ export default function ComparePage() {
       return;
     }
 
+    const leftCharacter = left;
+    const rightCharacter = right;
     let cancelled = false;
 
     async function loadShared() {
       setLoadingShared(true);
-      const ids = sharedEpisodeIds(left.episode, right.episode);
+      const ids = sharedEpisodeIds(leftCharacter.episode, rightCharacter.episode);
       const episodes = await getEpisodesByIds(ids);
       if (cancelled) return;
       setShared(episodes);
